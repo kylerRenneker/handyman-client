@@ -5,6 +5,8 @@ export default function SearchHandyMen(props) {
 
 
     return (
-        <HMSearchForm />
+        <div className="landing__search">
+            <HMSearchForm />
+        </div>
     )
 }
