@@ -2,6 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import Header from '../Header/Header'
 import SearchHandyMen from '../../routes/SearchLandingPage/SearchHandyMen'
+import HandymanListPage from '../../routes/HandymanListPage/HandymanListPage'
 import './App.css'
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
           exact
           path={'/'}
           component={SearchHandyMen}
+        />
+        <Route
+          path={'/handymen'}
+          component={HandymanListPage}
         />
       </main>
     </div>
