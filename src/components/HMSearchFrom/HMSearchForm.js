@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { services } from '../../dummyData'
 import { providers } from '../../dummyData'
+import ProviderListContext from '../../contexts/ProviderListContext'
 
 console.log(services)
 
 export default function HMSearchForm(props) {
+    const context = useContext(ProviderListContext)
+
     const options = services.map((service) => {
         return <option key={service.id} value={service.id}>{service.name}</option>
     })
-    console.log(options)
 
     const submitSearch = (ev) => {
         ev.preventDefault();
@@ -17,11 +19,14 @@ export default function HMSearchForm(props) {
         const { options } = ev.target
 
         const service = Number(options.value)
+
         const providersList = providers.filter(provider => {
             return provider.location === zipcode.value && provider.services.includes(service)
         })
 
-        console.log(providersList)
+        context.setProviderList(providersList)
+
+        console.log('context after submit: ', context)
     }
 
     return (
