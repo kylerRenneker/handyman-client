@@ -1,12 +1,12 @@
 import React from 'react'
-import HMSearchForm from '../../components/HMSearchFrom/HMSearchForm';
+import HandymanSearchForm from '../../components/HandymanSearchFrom/HandymanSearchForm';
 
 export default function SearchHandyMen(props) {
 
 
     return (
         <div className="landing__search">
-            <HMSearchForm />
+            <HandymanSearchForm {...props} />
         </div>
     )
 }

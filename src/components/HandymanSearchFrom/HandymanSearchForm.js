@@ -1,16 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { services } from '../../dummyData'
 import { providers } from '../../dummyData'
-import ProviderListContext from '../../contexts/ProviderListContext'
+import HandymanListContext from '../../contexts/HandymanListContext'
 
-console.log(services)
-
-export default function HMSearchForm(props) {
-    const context = useContext(ProviderListContext)
+export default function HandymanSearchForm(props) {
+    const context = useContext(HandymanListContext)
 
     const options = services.map((service) => {
         return <option key={service.id} value={service.id}>{service.name}</option>
     })
+
+
+    useEffect(() => {
+
+    })
+
+    console.log(props)
 
     const submitSearch = (ev) => {
         ev.preventDefault();
@@ -20,13 +25,12 @@ export default function HMSearchForm(props) {
 
         const service = Number(options.value)
 
-        const providersList = providers.filter(provider => {
+        const handymanList = providers.filter(provider => {
             return provider.location === zipcode.value && provider.services.includes(service)
         })
 
-        context.setProviderList(providersList)
-
-        console.log('context after submit: ', context)
+        context.setHandymanList(handymanList)
+        props.history.push('/handymen')
     }
 
     return (

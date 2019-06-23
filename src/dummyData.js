@@ -25,15 +25,21 @@ export const services = [
     },
 ]
 
+const users = [
+
+]
+
 export const providers = [
     {
         id: 1,
-        user_id: 2,
+        user_id: 1,
         provider_name: "Rick's Repair",
         introduction: null,
         services: [1, 5],
         location: "32541",
-        quote_requests_list: [1] //the quote request list will be for the provider dashboard
+        quote_requests_list: [1], //the quote request list will be for the provider dashboard
+        avg_rating: 5,
+        reviews: [1, 2, 3]
     },
 
     {
@@ -43,7 +49,9 @@ export const providers = [
         introduction: null,
         services: [2],
         location: "33410",
-        quote_requests_list: [1] //the quote request list will be for the provider dashboard
+        quote_requests_list: [1], //the quote request list will be for the provider dashboard
+        avg_rating: 5,
+        reviews: [4, 5]
     },
 
     {
@@ -53,7 +61,9 @@ export const providers = [
         introduction: null,
         services: [1, 4],
         location: "32541",
-        quote_requests_list: [1] //the quote request list will be for the provider dashboard
+        quote_requests_list: [1], //the quote request list will be for the provider dashboard
+        avg_rating: 2,
+        reviews: [6, 7]
     },
 
     {
@@ -63,7 +73,9 @@ export const providers = [
         introduction: null,
         services: [6],
         location: "33410",
-        quote_requests_list: [1] //the quote request list will be for the provider dashboard
+        quote_requests_list: [1], //the quote request list will be for the provider dashboard
+        avg_rating: 2,
+        reviews: [8, 9]
     },
 
     {
@@ -73,7 +85,26 @@ export const providers = [
         introduction: null,
         services: [6],
         location: "32541",
-        quote_requests_list: [1] //the quote request list will be for the provider dashboard
+        quote_requests_list: [1], //the quote request list will be for the provider dashboard
+        avg_rating: 4,
+        reviews: [10, 11]
     }
 
 ]
+
+const reviews = [
+    {
+        id: 1,
+        text: `Bacon ipsum dolor amet jerky pastrami turducken, meatloaf salami chuck beef drumstick 
+        meatball bacon jowl doner. Tongue pork belly flank, frankfurter pig strip steak alcatra short 
+        ribs turducken swine shoulder ham hock porchetta cupim. Porchetta short ribs jerky, venison 
+        meatloaf turducken ham meatball.`,
+        rating: 4,
+        date_created: "2019-06-03T18:29:11.996Z",
+        provider_id: 1,
+        user_id: ,
+
+    },
+
+]
+

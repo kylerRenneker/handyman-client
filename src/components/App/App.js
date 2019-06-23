@@ -21,6 +21,10 @@ function App() {
           path={'/handymen'}
           component={HandymanListPage}
         />
+        <Route
+          path={'/handymen/:handyman_id'}
+          component={HandymanPage}
+        />
       </main>
     </div>
   );

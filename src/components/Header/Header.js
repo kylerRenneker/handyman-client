@@ -1,5 +1,5 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import mySVG from './312334.svg'
 import './Header.css'
 
@@ -10,7 +10,9 @@ export default function Header() {
 
     return (
         <>
-            <img className="header__icon" src={mySVG} />
+            <Link to='/'>
+                <img className="header__icon" src={mySVG} />
+            </Link>
             <nav className="header__nav">
                 <a className="header__links">
                     Join as a HandyMan

@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './components/App/App';
-import { ProviderListProvider } from './contexts/ProviderListContext'
+import { HandymanListProvider } from './contexts/HandymanListContext'
 
 ReactDOM.render(
     <BrowserRouter>
-        <ProviderListProvider>
+        <HandymanListProvider>
             <App />
-        </ProviderListProvider>
+        </HandymanListProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );
