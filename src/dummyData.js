@@ -25,7 +25,7 @@ export const services = [
     },
 ]
 
-const users = [
+export const users = [
     {
         id: 1,
         user_name: 'RickyReparo',
@@ -111,7 +111,7 @@ export const providers = [
         id: 1,
         user_id: 1,
         provider_name: "Rick's Repair",
-        introduction: null,
+        introduction: 'Bacon ipsum dolor amet meatloaf landjaeger t-bone sausage, hamburger ball tip cupim frankfurter pancetta turducken pork belly venison capicola turkey kielbasa. Swine t-bone meatloaf, chuck leberkas pig pork venison short loin sirloin landjaeger flank cow corned beef shoulder.',
         services: [1, 5],
         location: "32541",
         quote_requests_list: [1], //the quote request list will be for the provider dashboard
@@ -122,7 +122,7 @@ export const providers = [
         id: 2,
         user_id: 2,
         provider_name: "Betty's Bathroom Repair",
-        introduction: null,
+        introduction: 'Bacon ipsum dolor amet meatloaf landjaeger t-bone sausage, hamburger ball tip cupim frankfurter pancetta turducken pork belly venison capicola turkey kielbasa. Swine t-bone meatloaf, chuck leberkas pig pork venison short loin sirloin landjaeger flank cow corned beef shoulder.',
         services: [2],
         location: "33410",
         quote_requests_list: [1], //the quote request list will be for the provider dashboard
@@ -133,7 +133,7 @@ export const providers = [
         id: 3,
         user_id: 3,
         provider_name: "Curt's Curtains",
-        introduction: null,
+        introduction: 'Bacon ipsum dolor amet meatloaf landjaeger t-bone sausage, hamburger ball tip cupim frankfurter pancetta turducken pork belly venison capicola turkey kielbasa. Swine t-bone meatloaf, chuck leberkas pig pork venison short loin sirloin landjaeger flank cow corned beef shoulder.',
         services: [1, 4],
         location: "32541",
         quote_requests_list: [1], //the quote request list will be for the provider dashboard
@@ -144,7 +144,7 @@ export const providers = [
         id: 4,
         user_id: 4,
         provider_name: "Right Roofing",
-        introduction: null,
+        introduction: 'Bacon ipsum dolor amet meatloaf landjaeger t-bone sausage, hamburger ball tip cupim frankfurter pancetta turducken pork belly venison capicola turkey kielbasa. Swine t-bone meatloaf, chuck leberkas pig pork venison short loin sirloin landjaeger flank cow corned beef shoulder.',
         services: [6],
         location: "33410",
         quote_requests_list: [1], //the quote request list will be for the provider dashboard
@@ -155,7 +155,7 @@ export const providers = [
         id: 5,
         user_id: 5,
         provider_name: "Frank's Flooring",
-        introduction: null,
+        introduction: 'Bacon ipsum dolor amet meatloaf landjaeger t-bone sausage, hamburger ball tip cupim frankfurter pancetta turducken pork belly venison capicola turkey kielbasa. Swine t-bone meatloaf, chuck leberkas pig pork venison short loin sirloin landjaeger flank cow corned beef shoulder.',
         services: [6],
         location: "32541",
         quote_requests_list: [1], //the quote request list will be for the provider dashboard
@@ -164,7 +164,7 @@ export const providers = [
 
 ]
 
-const reviews = [
+export const reviews = [
     {
         id: 1,
         text: `Bacon ipsum dolor amet jerky pastrami turducken, meatloaf salami chuck beef drumstick 
@@ -207,7 +207,7 @@ const reviews = [
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
         provider_id: 1,
-        user_id: 6,
+        user_id: 8,
     },
     {
         id: 5,
@@ -218,7 +218,7 @@ const reviews = [
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
         provider_id: 1,
-        user_id: 6,
+        user_id: 9,
     },
     {
         id: 6,
@@ -228,7 +228,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 3,
         user_id: 6,
     },
     {
@@ -239,7 +239,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 3,
         user_id: 6,
     },
     {
@@ -250,7 +250,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 4,
         user_id: 6,
     },
     {
@@ -261,7 +261,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 5,
         user_id: 6,
     },
     {
@@ -272,7 +272,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 5,
         user_id: 6,
     },
     {
@@ -283,7 +283,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 2,
         user_id: 6,
     },
     {
@@ -294,7 +294,7 @@ const reviews = [
         meatloaf turducken ham meatball.`,
         rating: 4,
         date_created: "2019-06-03T18:29:11.996Z",
-        provider_id: 1,
+        provider_id: 3,
         user_id: 6,
     },
 
