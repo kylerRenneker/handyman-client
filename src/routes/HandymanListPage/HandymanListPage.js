@@ -1,8 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanListItem from '../../components/HandymanListItem/HandymanListItem'
+import './HandymanListPage.css'
 
 export default function HandymanListPage(props) {
+
+    useEffect(() => {
+
+    })
 
     const context = useContext(HandymanListContext)
     console.log('context in hanymanListPage: ', context)
@@ -18,7 +23,7 @@ export default function HandymanListPage(props) {
     }
 
     return (
-        <section>
+        <section className="handyman__list__page">
             {renderHandymen()}
         </section>
     )

@@ -1,0 +1,4 @@
+.handyman__list__page {
+    display: flex;
+    flex-direction: column;
+}
