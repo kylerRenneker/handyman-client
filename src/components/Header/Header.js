@@ -11,18 +11,18 @@ export default function Header() {
     return (
         <>
             <Link to='/'>
-                <img className="header__icon" src={mySVG} />
+                <img className="header__icon" src={mySVG} alt={'Handyman Icon'} />
             </Link>
             <nav className="header__nav">
-                <a className="header__links">
+                <Link to='handymanSignup' className="header__links">
                     Join as a HandyMan
-                </a>
-                <a className="header__links">
+                </Link>
+                <Link className="header__links">
                     Sign Up
-                </a>
-                <a className="header__links">
+                </Link>
+                <Link className="header__links">
                     Login
-                </a>
+                </Link>
             </nav>
         </>
     )

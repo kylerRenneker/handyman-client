@@ -1,9 +1,12 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Header from '../Header/Header'
 import SearchHandyMen from '../../routes/SearchLandingPage/SearchHandyMen'
 import HandymanListPage from '../../routes/HandymanListPage/HandymanListPage'
 import HandymanPage from '../../routes/HandymanPage/HandymanPage'
+import HandymanSignUp from '../../routes/HandymanSignUp/HandymanSignUp'
+import SignUpPage from '../../routes/SignUpPage/SignUpPage'
+import LoginPage from '../../routes/LoginPage/LoginPage'
 import './App.css'
 
 function App() {
@@ -27,6 +30,24 @@ function App() {
           exact
           path={'/handymen/:handyman_id'}
           component={HandymanPage}
+        />
+
+        <Route
+          exact
+          path={'/handymanSignup'}
+          component={HandymanSignUp}
+        />
+
+        <Route
+          exact
+          path={'/signup'}
+          component={SignUpPage}
+        />
+
+        <Route
+          exact
+          path={'/login'}
+          component={LoginPage}
         />
       </main>
     </div>
