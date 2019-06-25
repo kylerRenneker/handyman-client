@@ -35,6 +35,17 @@ export default function HandymanSignUpForm(props) {
                     id='HandymanSignUpForm__user_name'>
                 </input>
             </div>
+            <div className='providerDisplay_name'>
+                <label htmlFor='HandymanSignUpForm__user_name'>
+                    User name
+                </label>
+                <input
+                    name='user_name'
+                    type='text'
+                    required
+                    id='HandymanSignUpForm__user_name'>
+                </input>
+            </div>
 
         </form>
     )
