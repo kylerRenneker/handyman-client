@@ -20,7 +20,7 @@ export default function HandymanSignUpForm(props) {
 
     return (
         <form
-            className='Handyman__signUpForm'
+            className='Handyman__signup__form'
             onSubmit={handleSubmit}
         >
             <div className='full_name'>

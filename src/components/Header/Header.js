@@ -20,7 +20,7 @@ export default function Header() {
                 <Link className="header__links">
                     Sign Up
                 </Link>
-                <Link className="header__links">
+                <Link to='/login' className="header__links">
                     Login
                 </Link>
             </nav>
