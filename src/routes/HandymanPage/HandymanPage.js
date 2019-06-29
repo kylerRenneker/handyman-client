@@ -59,12 +59,13 @@ export default function HandymanPage(props) {
     }
 
     function HandymanReviews({ reviews = [] }) {
+        console.log(reviews)
         return (
             <ul className='.handyman__review__list'><strong>Reviews</strong>
                 {
                     reviews.map(review =>
                         < li key={review.id} className="handyman__review" >
-                            <h3 className='review__header'>{review.user_fullName}</h3>
+                            <h3 className='review__header'>{review.user.full_name}</h3>
                             <div className='review__rating'>Rating: {review.rating}</div>
                             <p className='review__text'>{review.text}</p>
                         </li>
