@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Header from '../Header/Header'
-import SearchHandyMen from '../../routes/SearchLandingPage/SearchHandyMen'
+import SearchLandingPage from '../../routes/SearchLandingPage/SearchLandingPage'
 import HandymanListPage from '../../routes/HandymanListPage/HandymanListPage'
 import HandymanPage from '../../routes/HandymanPage/HandymanPage'
 import HandymanSignUp from '../../routes/HandymanSignUp/HandymanSignUp'
@@ -19,7 +19,7 @@ function App() {
         <Route
           exact
           path={'/'}
-          component={SearchHandyMen}
+          component={SearchLandingPage}
         />
         <Route
           exact

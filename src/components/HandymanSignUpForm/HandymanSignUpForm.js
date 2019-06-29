@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import './HandymanSignUpForm.css'
+import ServiceListContext from '../../contexts/ServiceListContext'
 
 export default function HandymanSignUpForm(props) {
-
+    const context = useContext(ServiceListContext)
     const [error, setError] = useState({ error: null })
 
     const handleSubmit = ev => {
         ev.preventDefault()
     }
+
+    const servicesOptions = context.services.map(service => {
+        return <>
+            <label for={service.id}>
+                <input id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
+
+        </>
+    })
 
     return (
         <form
@@ -35,9 +45,20 @@ export default function HandymanSignUpForm(props) {
                     id='HandymanSignUpForm__user_name'>
                 </input>
             </div>
+            <div className='email'>
+                <label htmlFor='HandymanSignUpForm__email'>
+                    Email
+                </label>
+                <input
+                    name='email'
+                    type='email'
+                    required
+                    id='HandymanSignUpForm__email'>
+                </input>
+            </div>
             <div className='display_name'>
                 <label htmlFor='HandymanSignUpForm__display_name'>
-                    Your Handyman display name
+                    Display name
                 </label>
                 <input
                     name='user_name'
@@ -47,17 +68,18 @@ export default function HandymanSignUpForm(props) {
                 </input>
             </div>
             <div className='location'>
-                <label></label>
-                <input></input>
+                <label htmlFor="zipcode">Your location</label>
+                <input inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code"></input>
             </div>
             <div className='handyman__services'>
+                <p>Choose the services you can provide:</p>
+                {servicesOptions}
+
+            </div>
+            {/* <div className='password'>
                 <label></label>
                 <input></input>
-            </div>
-            <div className='password'>
-                <label></label>
-                <input></input>
-            </div>
+            </div> */}
 
 
         </form>

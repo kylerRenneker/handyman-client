@@ -14,7 +14,7 @@ export default function Header() {
                 <img className="header__icon" src={mySVG} alt={'Handyman Icon'} />
             </Link>
             <nav className="header__nav">
-                <Link to='handymanSignup' className="header__links">
+                <Link to='/handymanSignup' className="header__links">
                     Join as a HandyMan
                 </Link>
                 <Link className="header__links">

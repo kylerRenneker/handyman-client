@@ -1,15 +1,43 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanListItem from '../../components/HandymanListItem/HandymanListItem'
+import HandymanApiService from '../../services/handyman-api-service'
 import './HandymanListPage.css'
 
 export default function HandymanListPage(props) {
+    const context = useContext(HandymanListContext)
+    //const [isLoading, setIsLoading] = useState(false)
+
+
+
+    const filterHandymenByService = (handymen, service) => {
+        return handymen.filter(handyman => handyman.services.includes(service))
+    }
 
     useEffect(() => {
+        context.clearError()
+        if (context.currentZipCode && context.service) {
+            localStorage.setItem('service', context.service)
+            localStorage.setItem('zipcode', context.currentZipCode)
+        }
+        const zipcode = localStorage.getItem('zipcode')
+        const service = Number(localStorage.getItem('service'))
 
-    })
+        context.setService(service)
+        context.setCurrentZipCode(zipcode)
 
-    const context = useContext(HandymanListContext)
+        HandymanApiService.getHandymen(zipcode, service)
+            .then(handymen => {
+                return filterHandymenByService(handymen, service)
+            })
+            .then(context.setHandymanList)
+            .catch(context.setError)
+        return () => {
+            context.clearHandymanList()
+        }
+    }, [])
+
+
     console.log('context in hanymanListPage: ', context)
 
     const renderHandymen = () => {
@@ -22,9 +50,30 @@ export default function HandymanListPage(props) {
         )
     }
 
+    const renderPage = () => {
+        const { error, handymanList } = context
+        let content
+        if (error) {
+            content = <h2 className='error'>{error.error}</h2>
+
+        }
+        else if (!handymanList) {
+            content = <div className='loading' />
+        }
+        else {
+            content = renderHandymen()
+        }
+        return (
+            <>
+                {content}
+            </>
+        )
+    }
+
     return (
-        <section className="handyman__list__page">
-            {renderHandymen()}
+        <section className="handyman__list">
+            {console.log(context.error)}
+            {renderPage()}
         </section>
     )
 

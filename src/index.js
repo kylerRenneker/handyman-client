@@ -5,12 +5,15 @@ import './index.css';
 import App from './components/App/App';
 import { HandymanListProvider } from './contexts/HandymanListContext'
 import { HandymanProvider } from './contexts/HandymanContext'
+import { ServiceListProvider } from './contexts/ServiceListContext'
 
 ReactDOM.render(
     <BrowserRouter>
         <HandymanListProvider>
             <HandymanProvider>
-                <App />
+                <ServiceListProvider>
+                    <App />
+                </ServiceListProvider>
             </HandymanProvider>
         </HandymanListProvider>
     </BrowserRouter>,

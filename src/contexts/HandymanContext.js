@@ -21,12 +21,10 @@ export default HandymanContext
 export function HandymanProvider(props) {
     const [handyman, setHandyman] = useState({})
     const [reviews, setReviews] = useState([])
-    const [error, setError] = useState({
-        error: null
-    })
+    const [error, setError] = useState({ error: null })
 
     const setErrorFn = error => {
-        setError({ error })
+        setError(error)
     }
 
     const clearError = () => {

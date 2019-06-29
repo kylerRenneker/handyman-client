@@ -1,3 +1,4 @@
-.Handyman__signUpForm label {
-    display: block;
+.Handyman__signUpForm div {
+    display: flex;
+    flex-direction: column;
 }
