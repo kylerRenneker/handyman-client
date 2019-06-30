@@ -8,8 +8,6 @@ export default function HandymanListPage(props) {
     const context = useContext(HandymanListContext)
     //const [isLoading, setIsLoading] = useState(false)
 
-
-
     const filterHandymenByService = (handymen, service) => {
         return handymen.filter(handyman => handyman.services.includes(service))
     }

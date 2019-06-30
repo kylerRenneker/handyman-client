@@ -6,13 +6,16 @@ import App from './components/App/App';
 import { HandymanListProvider } from './contexts/HandymanListContext'
 import { HandymanProvider } from './contexts/HandymanContext'
 import { ServiceListProvider } from './contexts/ServiceListContext'
+import { UserProvider } from './contexts/UserContext';
 
 ReactDOM.render(
     <BrowserRouter>
         <HandymanListProvider>
             <HandymanProvider>
                 <ServiceListProvider>
-                    <App />
+                    <UserProvider>
+                        <App />
+                    </UserProvider>
                 </ServiceListProvider>
             </HandymanProvider>
         </HandymanListProvider>

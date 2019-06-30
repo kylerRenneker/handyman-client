@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Redirect } from 'react-router-dom'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import ServiceListContext from '../../contexts/ServiceListContext'
@@ -11,6 +12,12 @@ export default function HandymanSearchForm(props) {
     const options = services.map((service) => {
         return <option key={service.id} value={service.id}>{service.name}</option>
     })
+
+    useEffect(() => {
+        HandymanApiService.getAllServices()
+            .then(servicesContext.setServices)
+            .catch(context.setError)
+    }, [])
 
     const submitSearch = (ev) => {
         ev.preventDefault();
