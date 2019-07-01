@@ -6,8 +6,10 @@ import './UserSignUpForm.css'
 
 export default function UserSignUpForm(props) {
     const [error, setError] = useState(null)
+    const [selectedServices, setSelectedServices] = useState([])
     const context = useContext(ServiceListContext)
 
+    const servicesSelected = []
     console.log(props)
 
     useEffect(() => {
@@ -16,10 +18,16 @@ export default function UserSignUpForm(props) {
             .catch(context.setError)
     }, [])
 
+    const onServiceChange = (ev) => {
+        console.log(ev.target.value)
+        servicesSelected.push(Number(ev.target.value))
+        console.log(servicesSelected)
+    }
+
     const servicesOptions = context.services.map(service => {
         return <>
             <label for={service.id}>
-                <input id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
+                <input onChange={onServiceChange} id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
 
         </>
     })
