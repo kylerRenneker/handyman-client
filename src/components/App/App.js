@@ -8,6 +8,7 @@ import HandymanSignUp from '../../routes/HandymanSignUp/HandymanSignUp'
 import SignUpPage from '../../routes/SignUpPage/SignUpPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import './App.css'
+import RedirectRoute from '../Utils/RedirectRoute';
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
         <Route
           exact
           path={'/handymanSignup'}
-          component={HandymanSignUp}
+          component={SignUpPage}
         />
 
         <Route

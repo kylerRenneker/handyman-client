@@ -1,5 +1,5 @@
 import config from '../config'
-// import TokenService from './token-service'
+import TokenService from './token-service'
 
 const HandymanApiService = {
     getHandymen(zipcode, service) {
@@ -29,7 +29,37 @@ const HandymanApiService = {
         }).then(res =>
             !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
         );
+    },
+    postReview(providerId, text, rating) {
+        console.log(TokenService.getAuthToken())
+        return fetch(`${config.API_ENDPOINT}/reviews`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify({
+                provider_id: providerId,
+                rating,
+                text
+            })
+        }).then(res =>
+            !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+        );
+    },
+    getUserEmail() {
+        return fetch(`${config.API_ENDPOINT}/users/loggedIn`, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${TokenService.getAuthToken()}`
+            },
+        })
+            .then(res =>
+                !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+            );
     }
+
+
 
 
 }

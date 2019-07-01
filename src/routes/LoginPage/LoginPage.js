@@ -10,7 +10,7 @@ export default function LoginPage(props) {
         const { location = {}, history = { push: () => { } } } = props
         const destination = (location.state || {}).from || '/'
         context.setLoggedIn(true)
-        history.push(destination)
+        history.goBack()
     }
 
     return (

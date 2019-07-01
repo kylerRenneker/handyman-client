@@ -21,6 +21,7 @@ export default HandymanContext
 export function HandymanProvider(props) {
     const [handyman, setHandyman] = useState({})
     const [reviews, setReviews] = useState([])
+    const [userEmail, setUserEmail] = useState(null)
     const [error, setError] = useState({ error: null })
 
     const setErrorFn = error => {
@@ -51,13 +52,24 @@ export function HandymanProvider(props) {
         ])
     }
 
+    const setUserEmailFn = email => {
+        setUserEmail(email)
+    }
+
+    const clearUserEmail = () => {
+        setUserEmail(null)
+    }
+
     const value = {
         handyman: handyman,
+        userEmail: userEmail,
         reviews: reviews,
         error: error,
         setError: setErrorFn,
         clearError: clearError,
         setHandyman: setHandymanFn,
+        setUserEmail: setUserEmailFn,
+        clearUserEmail: clearUserEmail,
         setReviews: setReviewsFn,
         clearHandyman: clearHandyman,
         addReview: addReview

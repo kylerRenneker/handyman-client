@@ -1,7 +1,11 @@
 import React, { useContext } from 'react'
 import HandymanContext from '../../contexts/HandymanContext'
+import HandymanApiService from '../../services/handyman-api-service';
+import AuthApiService from '../../services/auth-api-service';
+import TokenService from '../../services/token-service';
 
 export default function ReviewForm(props) {
+    console.log(props)
 
     const context = useContext(HandymanContext)
 
@@ -10,7 +14,19 @@ export default function ReviewForm(props) {
         const { handyman } = context
         const { text, rating } = ev.target
 
-        //need api service to post review
+        if (!TokenService.hasAuthToken()) {
+            props.history.push('/login')
+        }
+        // else {
+        //     props.location
+        // }
+
+        HandymanApiService.postReview(handyman.id, text.value, Number(rating.value))
+            .then(context.addReview)
+            .then(() => {
+                text.value = ''
+            })
+            .catch(context.setError)
 
     }
 

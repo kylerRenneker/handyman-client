@@ -1,10 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import AuthApiService from '../../services/auth-api-service'
+import ServiceListContext from '../../contexts/ServiceListContext'
+import HandymanApiService from '../../services/handyman-api-service'
+import './UserSignUpForm.css'
 
 export default function UserSignUpForm(props) {
     const [error, setError] = useState(null)
+    const context = useContext(ServiceListContext)
 
-    console.log(error)
+    console.log(props)
+
+    useEffect(() => {
+        HandymanApiService.getAllServices()
+            .then(context.setServices)
+            .catch(context.setError)
+    }, [])
+
+    const servicesOptions = context.services.map(service => {
+        return <>
+            <label for={service.id}>
+                <input id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
+
+        </>
+    })
 
     const handleSubmit = ev => {
         ev.preventDefault()
@@ -28,6 +46,26 @@ export default function UserSignUpForm(props) {
                 console.log(res.error)
                 setError(res.error)
             })
+    }
+
+    const renderHandymanSignUp = () => {
+        return (
+            <>
+                <div className='display_name'>
+                    <label htmlFor='HandymanSignUpForm__display_name'>Display name</label>
+                    <input id='HandymanSignUpForm__display_name' type='text'></input>
+                </div>
+                <div className='location'>
+                    <label htmlFor="zipcode">Your location</label>
+                    <input inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code"></input>
+                </div>
+                <div className='handyman__services'>
+                    <p>Choose the services you can provide:</p>
+                    {servicesOptions}
+
+                </div>
+            </>
+        )
     }
 
     return (
@@ -82,6 +120,9 @@ export default function UserSignUpForm(props) {
                     id='signup__email'>
                 </input>
             </div>
+            {
+                (props.location.pathname === '/handymanSignup') ? renderHandymanSignUp() : ''
+            }
             <button type='submit'>
                 Register
         </button>

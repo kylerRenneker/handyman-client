@@ -1,18 +1,37 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './QuoteRequestForm.css'
-
-import { services } from '../../dummyData'
-// import HandymanContext from '../../contexts/HandymanContext'
+import ServiceListContext from '../../contexts/ServiceListContext'
+import HandymanApiService from '../../services/handyman-api-service'
 
 export default function QuoteRequestForm(props) {
+    const context = useContext(ServiceListContext)
+    const { handyman, userEmail } = props
 
-    // const context = useContext(HandymanContext)
 
-    console.log(props)
 
-    const options = services.map((service) => {
-        return <option key={service.id} value={service.id}>{service.name}</option>
+    const renderEmailInput = () => {
+        let email
+
+        if (userEmail) {
+            email = <input required type='email' id='quoteRequest__email' value={userEmail.email}></input>
+        }
+        else {
+            email = <input required type='email' id='quoteRequest__email'></input>
+        }
+        return email
+    }
+
+    const options = context.services.map((service) => {
+        if (handyman.services.includes(service.id)) {
+            return <option key={service.id} value={service.id}>{service.name}</option>
+        }
     })
+
+    useEffect(() => {
+        HandymanApiService.getAllServices()
+            .then(context.setServices)
+            .catch(context.setError)
+    }, [])
 
     const handleSubmit = (ev) => {
         ev.preventDefault()
@@ -22,7 +41,7 @@ export default function QuoteRequestForm(props) {
     return (
         <form className='quote__form' onSubmit={handleSubmit}>
             <label htmlFor='location'>Location</label>
-            <input inputMode="numeric" maxLength="5" autoComplete="postal-code" id="location" name="zipcode"></input>
+            <input inputMode="numeric" maxLength="5" autoComplete="postal-code" id="location" name="zipcode" value={handyman.location}></input>
 
             <label htmlFor='options'>Select a needed service</label>
             <select id='options' name="options">
@@ -30,7 +49,7 @@ export default function QuoteRequestForm(props) {
             </select>
 
             <label htmlFor='quoteRequest__email'>Email</label>
-            <input required type='email' id='quoteRequest__email'></input>
+            {renderEmailInput()}
 
             <textarea
                 className='quoteRequest__textArea'

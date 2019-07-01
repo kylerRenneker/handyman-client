@@ -4,6 +4,7 @@ import HandymanApiService from '../../services/handyman-api-service'
 import './HandymanPage.css'
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm';
+import TokenService from '../../services/token-service';
 
 
 export default function HandymanPage(props) {
@@ -18,22 +19,30 @@ export default function HandymanPage(props) {
         HandymanApiService.getHandymanReviews(handymanId, currentZipCode)
             .then(handymanContext.setReviews)
             .catch(handymanContext.setError)
+        if (TokenService.hasAuthToken()) {
+            HandymanApiService.getUserEmail()
+                .then(handymanContext.setUserEmail)
+                .catch(handymanContext.setError)
+        }
+        else if (!TokenService.hasAuthToken()) {
+            handymanContext.clearUserEmail()
+        }
         return () => {
             handymanContext.clearHandyman()
         }
     }, [])
 
     const renderHandyman = () => {
-        const { handyman } = handymanContext;
+        const { handyman, userEmail } = handymanContext;
         const reviews = handymanContext.reviews;
         return (
             <>
                 <h2>{handyman.provider_name}</h2>
                 <div>Average rating: {parseInt(handyman.average_review_rating)}</div>
-                <QuoteRequestForm handyman={handyman} />
+                <QuoteRequestForm handyman={handyman} userEmail={userEmail} {...props} />
                 <p><strong>Introduction: </strong>{handyman.introduction}</p>
                 <HandymanReviews reviews={reviews} />
-                <ReviewForm />
+                <ReviewForm {...props} />
             </>
         )
     }
@@ -43,9 +52,7 @@ export default function HandymanPage(props) {
         console.log(error)
         let content
         if (error.error) {
-            content = (error.error === 'That provider does not exist')
-                ? <p className='red'>Handyman not found</p>
-                : <p className='red'>There was an error</p>
+            content = <h2 className='red'>{error.error}</h2>
         } else if (!handyman.id) {
             content = <div className='loading' />
         } else {
