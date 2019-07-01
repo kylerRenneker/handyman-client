@@ -18,6 +18,8 @@ export default function UserSignUpForm(props) {
             .catch(context.setError)
     }, [])
 
+    const
+
     const onServiceChange = (ev) => {
         console.log(ev.target.value)
         servicesSelected.push(Number(ev.target.value))
