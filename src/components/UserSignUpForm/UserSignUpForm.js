@@ -18,8 +18,6 @@ export default function UserSignUpForm(props) {
             .catch(context.setError)
     }, [])
 
-    const
-
     const onServiceChange = (ev) => {
         console.log(ev.target.value)
         servicesSelected.push(Number(ev.target.value))
@@ -37,6 +35,7 @@ export default function UserSignUpForm(props) {
     const handleSubmit = ev => {
         ev.preventDefault()
         const { full_name, email, user_name, password } = ev.target
+        const { display_name, location, introduction } = ev.target
 
         setError(null)
         AuthApiService.postUser({
@@ -45,6 +44,16 @@ export default function UserSignUpForm(props) {
             full_name: full_name.value,
             email: email.value,
         })
+            .then(user =>
+                (props.location.pathname === '/handymanSignup') ? AuthApiService.postHandyMan({
+                    user_id: user.id,
+                    display_name: display_name.value,
+                    introduction: introduction.value,
+                    services: servicesSelected,
+                    location: location.value
+                }) : user
+            )
+            .then(user => console.log(user))
             .then(user => {
                 full_name.value = ''
                 email.value = ''
@@ -53,8 +62,7 @@ export default function UserSignUpForm(props) {
                 props.onSignUpSuccess()
             })
             .catch(res => {
-                console.log(res.error)
-                setError(res.error)
+                setError(res.error.error)
             })
     }
 
@@ -63,16 +71,19 @@ export default function UserSignUpForm(props) {
             <>
                 <div className='display_name'>
                     <label htmlFor='HandymanSignUpForm__display_name'>Display name</label>
-                    <input id='HandymanSignUpForm__display_name' type='text'></input>
+                    <input required id='HandymanSignUpForm__display_name' type='text' name='display_name'></input>
                 </div>
                 <div className='location'>
                     <label htmlFor="zipcode">Your location</label>
-                    <input inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code"></input>
+                    <input required inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code" name='location'></input>
+                </div>
+                <div className='handyman__introduction'>
+                    <label htmlFor='introduction'>Introduce your business</label>
+                    <textarea id='introduction' name='introduction' rows='5' cols='33'></textarea>
                 </div>
                 <div className='handyman__services'>
                     <p>Choose the services you can provide:</p>
                     {servicesOptions}
-
                 </div>
             </>
         )

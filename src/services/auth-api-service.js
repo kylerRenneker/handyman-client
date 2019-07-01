@@ -30,6 +30,20 @@ const AuthApiService = {
                     : res.json()
             )
     },
+    postHandyMan(user) {
+        return fetch(`${config.API_ENDPOINT}/users/handyman`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            )
+    }
 }
 
 export default AuthApiService;
