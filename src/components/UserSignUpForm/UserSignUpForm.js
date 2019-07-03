@@ -6,11 +6,9 @@ import './UserSignUpForm.css'
 
 export default function UserSignUpForm(props) {
     const [error, setError] = useState(null)
-    const [selectedServices, setSelectedServices] = useState([])
     const context = useContext(ServiceListContext)
 
     const servicesSelected = []
-    console.log(props)
 
     useEffect(() => {
         HandymanApiService.getAllServices()
@@ -19,8 +17,14 @@ export default function UserSignUpForm(props) {
     }, [])
 
     const onServiceChange = (ev) => {
-        console.log(ev.target.value)
-        servicesSelected.push(Number(ev.target.value))
+        console.log(ev.target.checked)
+        if (ev.target.checked) {
+            servicesSelected.push(Number(ev.target.value))
+        }
+        else {
+            let index = servicesSelected.indexOf(ev.target.value)
+            servicesSelected.splice(index, 1)
+        }
         console.log(servicesSelected)
     }
 
@@ -47,13 +51,13 @@ export default function UserSignUpForm(props) {
             .then(user =>
                 (props.location.pathname === '/handymanSignup') ? AuthApiService.postHandyMan({
                     user_id: user.id,
-                    display_name: display_name.value,
+                    provider_name: display_name.value,
                     introduction: introduction.value,
                     services: servicesSelected,
                     location: location.value
                 }) : user
             )
-            .then(user => console.log(user))
+            .then(res => console.log(res))
             .then(user => {
                 full_name.value = ''
                 email.value = ''

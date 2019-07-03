@@ -5,10 +5,14 @@ import './HandymanPage.css'
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm';
 import TokenService from '../../services/token-service';
+import ServiceListContext from '../../contexts/ServiceListContext'
 
 
 export default function HandymanPage(props) {
     const handymanContext = useContext(HandymanContext)
+    const serviceContext = useContext(ServiceListContext)
+
+    console.log(serviceContext.services)
 
     useEffect(() => {
         const currentZipCode = localStorage.getItem('zipcode')
@@ -38,7 +42,7 @@ export default function HandymanPage(props) {
         return (
             <>
                 <h2>{handyman.provider_name}</h2>
-                <div>Average rating: {parseInt(handyman.average_review_rating)}</div>
+                <div>Average rating: {handyman.average_review_rating ? parseInt(handyman.average_review_rating) : 'No current rating'}</div>
                 <QuoteRequestForm handyman={handyman} userEmail={userEmail} {...props} />
                 <p><strong>Introduction: </strong>{handyman.introduction}</p>
                 <HandymanReviews reviews={reviews} />
@@ -80,6 +84,10 @@ export default function HandymanPage(props) {
                 }
             </ul>
         )
+    }
+
+    function RenderServicesOffered() {
+
     }
 
     return (
