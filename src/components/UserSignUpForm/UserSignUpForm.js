@@ -17,7 +17,6 @@ export default function UserSignUpForm(props) {
     }, [])
 
     const onServiceChange = (ev) => {
-        console.log(ev.target.checked)
         if (ev.target.checked) {
             servicesSelected.push(Number(ev.target.value))
         }
@@ -25,7 +24,6 @@ export default function UserSignUpForm(props) {
             let index = servicesSelected.indexOf(ev.target.value)
             servicesSelected.splice(index, 1)
         }
-        console.log(servicesSelected)
     }
 
     const servicesOptions = context.services.map(service => {

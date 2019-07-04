@@ -31,7 +31,6 @@ const HandymanApiService = {
         );
     },
     postReview(providerId, text, rating) {
-        console.log(TokenService.getAuthToken())
         return fetch(`${config.API_ENDPOINT}/reviews`, {
             method: 'POST',
             headers: {

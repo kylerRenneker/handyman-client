@@ -5,8 +5,6 @@ import AuthApiService from '../../services/auth-api-service';
 import TokenService from '../../services/token-service';
 
 export default function ReviewForm(props) {
-    console.log(props)
-
     const context = useContext(HandymanContext)
 
     const handleSubmit = ev => {
@@ -24,7 +22,6 @@ export default function ReviewForm(props) {
                 text.value = ''
             })
             .catch(context.setError)
-
     }
 
     return (

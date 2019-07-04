@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanListItem from '../../components/HandymanListItem/HandymanListItem'
 import HandymanApiService from '../../services/handyman-api-service'
@@ -6,7 +6,6 @@ import './HandymanListPage.css'
 
 export default function HandymanListPage(props) {
     const context = useContext(HandymanListContext)
-    //const [isLoading, setIsLoading] = useState(false)
 
     const filterHandymenByService = (handymen, service) => {
         return handymen.filter(handyman => handyman.services.includes(service))
@@ -34,9 +33,6 @@ export default function HandymanListPage(props) {
             context.clearHandymanList()
         }
     }, [])
-
-
-    console.log('context in hanymanListPage: ', context)
 
     const renderHandymen = () => {
         const { handymanList = [] } = context
@@ -70,7 +66,6 @@ export default function HandymanListPage(props) {
 
     return (
         <section className="handyman__list">
-            {console.log(context.error)}
             {renderPage()}
         </section>
     )

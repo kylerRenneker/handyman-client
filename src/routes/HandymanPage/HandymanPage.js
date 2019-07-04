@@ -35,7 +35,6 @@ export default function HandymanPage(props) {
 
     const renderHandyman = () => {
         const { handyman, user } = context;
-        console.log(context)
         const reviews = context.reviews;
         return (
             <>
@@ -80,10 +79,6 @@ export default function HandymanPage(props) {
                 }
             </ul>
         )
-    }
-
-    function RenderServicesOffered() {
-
     }
 
     return (

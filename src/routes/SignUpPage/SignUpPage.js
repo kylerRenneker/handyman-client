@@ -5,7 +5,6 @@ export default function SignUpPage(props) {
 
     const handleSignUpSuccess = () => {
         const { history = { push: () => { } } } = props
-        console.log(props)
         history.push('/login')
     }
 
