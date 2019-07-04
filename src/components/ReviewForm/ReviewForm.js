@@ -17,9 +17,6 @@ export default function ReviewForm(props) {
         if (!TokenService.hasAuthToken()) {
             props.history.push('/login')
         }
-        // else {
-        //     props.location
-        // }
 
         HandymanApiService.postReview(handyman.id, text.value, Number(rating.value))
             .then(context.addReview)
