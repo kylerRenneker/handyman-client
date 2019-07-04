@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 
-// export const nullHandyman = {
-
-// }
-
 const HandymanContext = React.createContext({
     handyman: {},
     reviews: [],
+    user: {},
     error: null,
     setError: () => { },
     clearError: () => { },
@@ -21,7 +18,7 @@ export default HandymanContext
 export function HandymanProvider(props) {
     const [handyman, setHandyman] = useState({})
     const [reviews, setReviews] = useState([])
-    const [userEmail, setUserEmail] = useState(null)
+    const [user, setUser] = useState({})
     const [error, setError] = useState({ error: null })
 
     const setErrorFn = error => {
@@ -52,24 +49,24 @@ export function HandymanProvider(props) {
         ])
     }
 
-    const setUserEmailFn = email => {
-        setUserEmail(email)
+    const setUserFn = user => {
+        setUser(user)
     }
 
-    const clearUserEmail = () => {
-        setUserEmail(null)
+    const clearUser = () => {
+        setUser(null)
     }
 
     const value = {
         handyman: handyman,
-        userEmail: userEmail,
+        user: user,
         reviews: reviews,
         error: error,
         setError: setErrorFn,
         clearError: clearError,
         setHandyman: setHandymanFn,
-        setUserEmail: setUserEmailFn,
-        clearUserEmail: clearUserEmail,
+        setUser: setUserFn,
+        clearUser: clearUser,
         setReviews: setReviewsFn,
         clearHandyman: clearHandyman,
         addReview: addReview

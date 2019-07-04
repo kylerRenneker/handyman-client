@@ -5,9 +5,18 @@
 }
 
 .header__links {
+    margin-left: 15px;
     margin-right: 15px;
+    font-size: 12px;
 }
 
 .header__nav {
     padding: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav__not-loggin-in {
+    align-self: center;
 }

@@ -47,12 +47,25 @@ const HandymanApiService = {
             !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
         );
     },
-    getUserEmail() {
+    getUser() {
         return fetch(`${config.API_ENDPOINT}/users/loggedIn`, {
             headers: {
                 'content-type': 'application/json',
                 authorization: `bearer ${TokenService.getAuthToken()}`
             },
+        })
+            .then(res =>
+                !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+            );
+    },
+    postQuoteRequest(quoteRequest) {
+        return fetch(`${config.API_ENDPOINT}/quote`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(quoteRequest)
         })
             .then(res =>
                 !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()

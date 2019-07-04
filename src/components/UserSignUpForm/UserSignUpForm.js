@@ -57,7 +57,6 @@ export default function UserSignUpForm(props) {
                     location: location.value
                 }) : user
             )
-            .then(res => console.log(res))
             .then(user => {
                 full_name.value = ''
                 email.value = ''

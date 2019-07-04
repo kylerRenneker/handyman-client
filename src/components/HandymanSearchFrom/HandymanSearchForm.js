@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import ServiceListContext from '../../contexts/ServiceListContext'
+import './HandymanSearchForm.css'
 
 export default function HandymanSearchForm(props) {
     const context = useContext(HandymanListContext)
@@ -34,12 +35,12 @@ export default function HandymanSearchForm(props) {
 
     return (
         <form onSubmit={submitSearch} className='form__handyman'>
-            <select name="options">
+            <select name="options" className='form__landing__item landing__select'>
                 {options}
             </select>
             <label htmlFor="zipcode"></label>
-            <input required inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code"></input>
-            <button type="submit">Search</button>
+            <input className='form__landing__item' required inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code"></input>
+            <button className='form__landing__button' type="submit">Search</button>
         </form>
     );
 }

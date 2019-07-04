@@ -1,49 +1,47 @@
 import React, { useContext, useEffect } from 'react'
-import HandymanContext from '../../contexts/HandymanContext'
+import handymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import './HandymanPage.css'
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm';
 import TokenService from '../../services/token-service';
-import ServiceListContext from '../../contexts/ServiceListContext'
 
 
 export default function HandymanPage(props) {
-    const handymanContext = useContext(HandymanContext)
-    const serviceContext = useContext(ServiceListContext)
-
-    console.log(serviceContext.services)
+    const context = useContext(handymanContext)
 
     useEffect(() => {
         const currentZipCode = localStorage.getItem('zipcode')
         const handymanId = Number(props.match.params.handyman_id)
         HandymanApiService.getHandymanById(handymanId, currentZipCode)
-            .then(handymanContext.setHandyman)
-            .catch(handymanContext.setError)
+            .then(context.setHandyman)
+            .catch(context.setError)
         HandymanApiService.getHandymanReviews(handymanId, currentZipCode)
-            .then(handymanContext.setReviews)
-            .catch(handymanContext.setError)
+            .then(context.setReviews)
+            .catch(context.setError)
         if (TokenService.hasAuthToken()) {
-            HandymanApiService.getUserEmail()
-                .then(handymanContext.setUserEmail)
-                .catch(handymanContext.setError)
+            HandymanApiService.getUser()
+                .then(context.setUser)
+                .catch(context.setError)
         }
         else if (!TokenService.hasAuthToken()) {
-            handymanContext.clearUserEmail()
+            context.clearUser()
         }
         return () => {
-            handymanContext.clearHandyman()
+            context.clearHandyman()
+            context.clearUser()
         }
     }, [])
 
     const renderHandyman = () => {
-        const { handyman, userEmail } = handymanContext;
-        const reviews = handymanContext.reviews;
+        const { handyman, user } = context;
+        console.log(context)
+        const reviews = context.reviews;
         return (
             <>
                 <h2>{handyman.provider_name}</h2>
                 <div>Average rating: {handyman.average_review_rating ? parseInt(handyman.average_review_rating) : 'No current rating'}</div>
-                <QuoteRequestForm handyman={handyman} userEmail={userEmail} {...props} />
+                <QuoteRequestForm handyman={handyman} user={user} {...props} />
                 <p><strong>Introduction: </strong>{handyman.introduction}</p>
                 <HandymanReviews reviews={reviews} />
                 <ReviewForm {...props} />
@@ -52,8 +50,7 @@ export default function HandymanPage(props) {
     }
 
     const renderPage = () => {
-        const { error, handyman } = handymanContext
-        console.log(error)
+        const { error, handyman } = context
         let content
         if (error.error) {
             content = <h2 className='red'>{error.error}</h2>
@@ -70,7 +67,6 @@ export default function HandymanPage(props) {
     }
 
     function HandymanReviews({ reviews = [] }) {
-        console.log(reviews)
         return (
             <ul className='.handyman__review__list'><strong>Reviews</strong>
                 {

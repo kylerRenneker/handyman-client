@@ -1,0 +1,22 @@
+.form__handyman {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__landing__item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    border: none;
+}
+
+.form__landing__button {
+    width: 100px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #87B6A7;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
