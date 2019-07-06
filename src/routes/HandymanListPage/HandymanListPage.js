@@ -65,7 +65,7 @@ export default function HandymanListPage(props) {
     }
 
     return (
-        <section className="handyman__list">
+        <section className='handyman__list'>
             {renderPage()}
         </section>
     )

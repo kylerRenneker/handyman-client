@@ -1,11 +1,17 @@
 import React from 'react'
 import UserSignUpForm from '../../components/UserSignUpForm/UserSignUpForm'
+import './SignUpPage.css'
 
 export default function SignUpPage(props) {
 
     const handleSignUpSuccess = () => {
         const { history = { push: () => { } } } = props
-        history.push('/login')
+        history.push({
+            pathname: 'login',
+            state: {
+                from: '/signup'
+            }
+        })
     }
 
     return (

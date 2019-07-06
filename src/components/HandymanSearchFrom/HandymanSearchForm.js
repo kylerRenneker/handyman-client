@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import ServiceListContext from '../../contexts/ServiceListContext'
@@ -35,12 +34,12 @@ export default function HandymanSearchForm(props) {
 
     return (
         <form onSubmit={submitSearch} className='form__handyman'>
-            <select name="options" className='form__landing__item landing__select'>
+            <select name='options' className='landingForm__item landing__select'>
                 {options}
             </select>
-            <label htmlFor="zipcode"></label>
-            <input className='form__landing__item' required inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code"></input>
-            <button className='form__landing__button' type="submit">Search</button>
+            <label className='landing__zip'>
+                <input className='landingForm__item input__zipcode' required inputMode='numeric' maxLength='5' autoComplete='postal-code' id='search__zipcode' name='zipcode' placeholder='Zip code'></input></label>
+            <button className='landingForm__button landingForm__item' type='submit'>Search</button>
         </form>
     );
 }

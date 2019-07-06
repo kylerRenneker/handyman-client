@@ -4,19 +4,51 @@
     cursor: pointer;
 }
 
-.header__links {
-    margin-left: 15px;
-    margin-right: 15px;
-    font-size: 12px;
-}
-
-.header__nav {
-    padding: 1em;
+.headerIcon__mobile {
     padding: 1em;
     display: flex;
     flex-direction: row;
 }
 
-.nav__not-loggin-in {
+.nav__logged-in {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__links {
+    font-size: 1.8em;
+    padding: 15px 12px;
+}
+
+.header__links:visited {
+    color:inherit;
+}
+
+.signout {
     align-self: center;
+}
+
+.menu__toggle {
+    width: 20px;
+    height: 20px;
+    margin: auto 10px;
+}
+
+.nav__not-loggin-in {
+    display: flex;
+    flex-direction: column;
+    display: none;
+}
+
+.nav-show {
+    display: flex;
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    height: 100%;
+    background: white;
+}
+
+.arrow-hide {
+    display: none;
 }

@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import './QuoteRequestForm.css'
 import ServiceListContext from '../../contexts/ServiceListContext'
 import HandymanApiService from '../../services/handyman-api-service'
+import TokenService from '../../services/token-service'
 
 export default function QuoteRequestForm(props) {
     const [error, setError] = useState(null)
     const context = useContext(ServiceListContext)
     const { handyman, user } = props
-
-
 
     const renderEmailInput = () => {
         let email
@@ -38,22 +37,25 @@ export default function QuoteRequestForm(props) {
         ev.preventDefault()
         setError(null)
         const { zipcode, services, email, description } = ev.target
-
-        HandymanApiService.postQuoteRequest({
-            provider_id: handyman.id,
-            user_id: user.id,
-            location: zipcode.value,
-            email: email.value,
-            description: description.value,
-            services: services.value
-        })
-            .then(quote => {
-                description.value = ''
+        if (!TokenService.hasAuthToken()) {
+            props.history.push('/login')
+        }
+        else {
+            HandymanApiService.postQuoteRequest({
+                provider_id: handyman.id,
+                user_id: user.id,
+                location: zipcode.value,
+                email: email.value,
+                description: description.value,
+                services: services.value
             })
-            .catch(res => {
-                setError(res.error)
-            })
-
+                .then(quote => {
+                    description.value = ''
+                })
+                .catch(res => {
+                    setError(res.error)
+                })
+        }
     }
 
     return (
@@ -62,10 +64,10 @@ export default function QuoteRequestForm(props) {
                 {error && <p className='red'>{error}</p>}
             </div>
             <label htmlFor='location'>Location</label>
-            <input inputMode="numeric" maxLength="5" autoComplete="postal-code" id="location" name="zipcode" defaultValue={handyman.location}></input>
+            <input inputMode='numeric' maxLength='5' autoComplete='postal-code' id='location' name='zipcode' defaultValue={handyman.location}></input>
 
             <label htmlFor='options'>Select a needed service</label>
-            <select id='options' name="services">
+            <select id='options' name='services'>
                 {options}
             </select>
 

@@ -4,4 +4,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0px 20px;
+}
+
+.handymanSearch__header{
+    font-size: 3em;
+    font-weight: 400;
 }

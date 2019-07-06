@@ -5,7 +5,7 @@ import './HandymanListItem.css'
 export default function ProviderListItem(props) {
     const { provider } = props
     return (
-        <Link to={`/handymen/${provider.id}`} className="link__handyman">
+        <Link to={`/handymen/${provider.id}`} className='link__handyman'>
             <header className='list__item__header'>
                 <h2>{provider.provider_name}</h2>
             </header>

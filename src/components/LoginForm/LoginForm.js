@@ -3,6 +3,7 @@ import AuthApiService from '../../services/auth-api-service'
 import TokenService from '../../services/token-service'
 
 export default function LoginForm(props) {
+    console.log(props)
     const [error, setError] = useState(null)
 
     const handleSubmitJwtAuth = ev => {
@@ -38,6 +39,7 @@ export default function LoginForm(props) {
                     User name
           </label>
                 <input
+                    className='login__inputText'
                     required
                     name='user_name'
                     id='LoginForm__user_name'>
@@ -48,13 +50,14 @@ export default function LoginForm(props) {
                     Password
           </label>
                 <input
+                    className='login__inputText'
                     required
                     name='password'
                     type='password'
                     id='LoginForm__password'>
                 </input>
             </div>
-            <button type='submit'>
+            <button className='login__button' type='submit'>
                 Login
         </button>
         </form>

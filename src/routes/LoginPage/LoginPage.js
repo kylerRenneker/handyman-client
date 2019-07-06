@@ -1,16 +1,20 @@
 import React, { useContext } from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
-import UserContext from '../../contexts/UserContext';
+import UserContext from '../../contexts/UserContext'
 
 export default function LoginPage(props) {
     const context = useContext(UserContext)
-    console.log(props)
 
     const handleLoginSuccess = () => {
         const { location = {}, history = { push: () => { } } } = props
-        const destination = (location.state || {}).from || '/'
+        //const destination = (location.state || {}).from || '/'
         context.setLoggedIn(true)
-        history.goBack()
+        if (history.location.state) {
+            history.push('/')
+        }
+        else {
+            history.goBack()
+        }
     }
 
     return (

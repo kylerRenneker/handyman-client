@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import HandymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service';
-import AuthApiService from '../../services/auth-api-service';
 import TokenService from '../../services/token-service';
 
 export default function ReviewForm(props) {

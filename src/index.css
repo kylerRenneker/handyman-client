@@ -5,7 +5,8 @@
 body {
   margin: 0;
   font-family: 'Noto Sans TC', 'sans-serif';
-  background-color: #F08A4B;
+  font-size: 10px;
+  color: #2f3033;
   -webkit-font-smoothing: antialiased; 
   -moz-osx-font-smoothing: grayscale;
 }

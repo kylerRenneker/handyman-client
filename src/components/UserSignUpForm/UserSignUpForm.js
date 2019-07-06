@@ -28,7 +28,7 @@ export default function UserSignUpForm(props) {
 
     const servicesOptions = context.services.map(service => {
         return <>
-            <label for={service.id}>
+            <label key={service.id} key={service.id} htmlFor={service.id}>
                 <input onChange={onServiceChange} id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
 
         </>
@@ -63,7 +63,7 @@ export default function UserSignUpForm(props) {
                 props.onSignUpSuccess()
             })
             .catch(res => {
-                setError(res.error.error)
+                setError(res.error)
             })
     }
 
@@ -72,15 +72,15 @@ export default function UserSignUpForm(props) {
             <>
                 <div className='display_name'>
                     <label htmlFor='HandymanSignUpForm__display_name'>Display name</label>
-                    <input required id='HandymanSignUpForm__display_name' type='text' name='display_name'></input>
+                    <input className='signup__textInput' required id='HandymanSignUpForm__display_name' type='text' name='display_name'></input>
                 </div>
                 <div className='location'>
-                    <label htmlFor="zipcode">Your location</label>
-                    <input required inputMode="numeric" maxLength="5" autoComplete="postal-code" id="zipcode" name="zipcode" placeholder="Zip code" name='location'></input>
+                    <label htmlFor='signup-zipcode'>Your location</label>
+                    <input className='signup__textInput' required inputMode='numeric' maxLength='5' autoComplete='postal-code' id='signup__zipcode' name='zipcode' placeholder='Zip code' name='location'></input>
                 </div>
                 <div className='handyman__introduction'>
                     <label htmlFor='introduction'>Introduce your business</label>
-                    <textarea id='introduction' name='introduction' rows='5' cols='33'></textarea>
+                    <textarea className='signup__textInput' id='introduction' name='introduction' rows='5' cols='33'></textarea>
                 </div>
                 <div className='handyman__services'>
                     <p>Choose the services you can provide:</p>
@@ -103,6 +103,7 @@ export default function UserSignUpForm(props) {
                     Full name
                 </label>
                 <input
+                    className='signup__textInput'
                     name='full_name'
                     type='text'
                     required
@@ -114,6 +115,7 @@ export default function UserSignUpForm(props) {
                     User name
                 </label>
                 <input
+                    className='signup__textInput'
                     name='user_name'
                     type='text'
                     required
@@ -125,6 +127,7 @@ export default function UserSignUpForm(props) {
                     Password
                 </label>
                 <input
+                    className='signup__textInput'
                     name='password'
                     type='password'
                     required
@@ -136,6 +139,7 @@ export default function UserSignUpForm(props) {
                     Email
           </label>
                 <input
+                    className='signup__textInput'
                     name='email'
                     type='email'
                     required
@@ -145,7 +149,7 @@ export default function UserSignUpForm(props) {
             {
                 (props.location.pathname === '/handymanSignup') ? renderHandymanSignUp() : ''
             }
-            <button type='submit'>
+            <button className='signup__button' type='submit'>
                 Register
         </button>
         </form>

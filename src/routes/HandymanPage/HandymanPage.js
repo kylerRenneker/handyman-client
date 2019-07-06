@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from 'react'
 import handymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import './HandymanPage.css'
-import ReviewForm from '../../components/ReviewForm/ReviewForm';
-import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm';
-import TokenService from '../../services/token-service';
+import ReviewForm from '../../components/ReviewForm/ReviewForm'
+import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm'
+import TokenService from '../../services/token-service'
 
 
 export default function HandymanPage(props) {
@@ -70,7 +70,7 @@ export default function HandymanPage(props) {
             <ul className='.handyman__review__list'><strong>Reviews</strong>
                 {
                     reviews.map(review =>
-                        < li key={review.id} className="handyman__review" >
+                        < li key={review.id} className='handyman__review' >
                             <h3 className='review__header'>{review.user.full_name}</h3>
                             <div className='review__rating'>Rating: {review.rating}</div>
                             <p className='review__text'>{review.text}</p>

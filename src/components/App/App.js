@@ -7,15 +7,14 @@ import HandymanPage from '../../routes/HandymanPage/HandymanPage'
 import SignUpPage from '../../routes/SignUpPage/SignUpPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
 import './App.css'
-import RedirectRoute from '../Utils/RedirectRoute';
 
 function App() {
   return (
-    <div className="App">
-      <header className="app__header">
+    <div className='App'>
+      <header className='app__header'>
         <Header />
       </header>
-      <main className="app__main">
+      <main className='app__main'>
         <Route
           exact
           path={'/'}

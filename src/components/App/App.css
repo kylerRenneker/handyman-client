@@ -1,11 +1,11 @@
-.app__header{
-    display: flex;
-    justify-content: space-between;
-}
-
 .app__main {
     background-color: white;
     border-radius: 10px;
     max-width: 1000px;
     margin: auto;
+    padding: 0px 20px;
+}
+
+.red {
+    color: red;
 }

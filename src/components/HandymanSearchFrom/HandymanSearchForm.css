@@ -1,23 +1,44 @@
 .form__handyman {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-areas: 
+    "select select"
+    "input button";
+    width: 100%;
 }
 
-.form__landing__item {
-    margin-bottom: 10px;
+.landingForm__item {
     padding: 10px;
     border-radius: 5px;
     text-align: center;
+    font-size: 1.3em;
+    color: #676d73;
     border: none;
-    background-color: #65DEF1;
 }
 
-.form__landing__button {
-    width: 100px;
-    margin: auto;
-    padding: 10px;
-    border-radius: 20px;
+.landingForm__button {
+    grid-area: button;
+    width: 100%;
+    color: white;
     border: none;
-    background-color: #F96900;
+    background-color: #009fd9;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1)
+}
+
+.landing__select {
+    grid-area: select;
+    margin-bottom: 10px;
+}
+
+.landing__zip {
+    grid-area: input;
+    border-radius: 5px;
+}
+
+.landing__select, .landing__zip {
+    border: 1px solid #e9eced;
+    box-shadow: 0 2px 4px #e9eced;
+}
+
+.input__zipcode{
+    width: 100%;
 }
