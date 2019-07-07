@@ -1,4 +1,18 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Handyman
+
+[Live site](https://handyman-app.krenneker16.now.sh/)
+
+Handyman is a service based website with a goal of providing users(clients), looking for services, the ability to find a handyperson in their location(zipcode). The user is able to send the handyperson a quote request to request additional information, such as pricing, for the service they need completed. A user has the ability to sign up as a handyman or a regular user, although both can look for handymen and send quote requests, only the handyman can have their services and additional information displayed on their public handyman page. Users are also able to post reviews on handymen and give them a rating between 1-5 based on their satisfaction of the handypersons work.
+
+## Technologies Used
+
+* HTML
+* CSS
+* JavaScript
+* React
+
+
+
 
 ## Available Scripts
 
