@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import headerIcon from './312334.svg'
+import headerIcon from './104106.jpg'
 import downArrow from './down-arrow.svg'
 import './Header.css'
 import TokenService from '../../services/token-service'
@@ -21,6 +21,12 @@ export default function Header() {
     const toggleClass = () => {
         console.log('toggle class ran')
         setActive(!active)
+    }
+
+    const closeMenu = () => {
+        if (active) {
+            setActive(false)
+        }
     }
 
     const handleLogoutClick = () => {
@@ -56,7 +62,7 @@ export default function Header() {
             <nav className={'header__nav ' + (context.loggedIn ? 'nav__logged-in' : null)}>
                 <div className='headerIcon__mobile'>
                     <Link to='/'>
-                        <img className='header__icon' src={headerIcon} alt={'Handyman Icon'} />
+                        <img onClick={closeMenu} className='header__icon' src={headerIcon} alt={'Handyman Icon'} />
                     </Link>
                     <img onClick={toggleClass} className={'menu__toggle ' + (TokenService.hasAuthToken() ? 'arrow-hide' : null)} src={downArrow} />
                 </div>

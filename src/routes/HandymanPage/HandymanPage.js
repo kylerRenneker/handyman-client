@@ -82,7 +82,10 @@ export default function HandymanPage(props) {
     }
 
     return (
-        renderPage()
+        <section className='handyman__page'>
+            {renderPage()}
+        </section>
+
     )
 
 
