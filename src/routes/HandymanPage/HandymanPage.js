@@ -5,7 +5,8 @@ import './HandymanPage.css'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm'
 import TokenService from '../../services/token-service'
-
+import './HandymanPage.css'
+import HandymanImg from './312334.svg'
 
 export default function HandymanPage(props) {
     const context = useContext(handymanContext)
@@ -38,10 +39,16 @@ export default function HandymanPage(props) {
         const reviews = context.reviews;
         return (
             <>
-                <h2>{handyman.provider_name}</h2>
-                <div>Average rating: {handyman.average_review_rating ? parseInt(handyman.average_review_rating) : 'No current rating'}</div>
+                <div className='handymanPage__header'>
+                    <img className='handyman__image' src={HandymanImg} />
+                    <div>
+                        <h2>{handyman.provider_name}</h2>
+                        <div>Average rating: {handyman.average_review_rating ? parseInt(handyman.average_review_rating) : 'No current rating'}</div>
+                    </div>
+
+                </div>
                 <QuoteRequestForm handyman={handyman} user={user} {...props} />
-                <p><strong>Introduction: </strong>{handyman.introduction}</p>
+                <p className='handyman__introduction'><strong>Introduction: </strong>{handyman.introduction}</p>
                 <HandymanReviews reviews={reviews} />
                 <ReviewForm {...props} />
             </>

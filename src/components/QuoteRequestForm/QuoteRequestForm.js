@@ -13,10 +13,10 @@ export default function QuoteRequestForm(props) {
         let email
 
         if (user) {
-            email = <input required type='email' id='quoteRequest__email' name='email' defaultValue={user.email}></input>
+            email = <input className='quote__inputs' required type='email' id='quoteRequest__email' name='email' defaultValue={user.email}></input>
         }
         else {
-            email = <input required type='email' id='quoteRequest__email' name='email'></input>
+            email = <input className='quote__inputs' required type='email' id='quoteRequest__email' name='email'></input>
         }
         return email
     }
@@ -64,10 +64,10 @@ export default function QuoteRequestForm(props) {
                 {error && <p className='red'>{error}</p>}
             </div>
             <label htmlFor='location'>Location</label>
-            <input inputMode='numeric' maxLength='5' autoComplete='postal-code' id='location' name='zipcode' defaultValue={handyman.location}></input>
+            <input className='quote__inputs' inputMode='numeric' maxLength='5' autoComplete='postal-code' id='location' name='zipcode' defaultValue={handyman.location}></input>
 
             <label htmlFor='options'>Select a needed service</label>
-            <select id='options' name='services'>
+            <select className='quote__inputs' id='options' name='services'>
                 {options}
             </select>
 
@@ -75,7 +75,7 @@ export default function QuoteRequestForm(props) {
             {renderEmailInput()}
 
             <textarea
-                className='quoteRequest__textArea'
+                className='quoteRequest__textArea quote__inputs'
                 name='description'
                 required
                 aria-label='Provide a description of the work you need...'
@@ -85,7 +85,7 @@ export default function QuoteRequestForm(props) {
                 rows='5'
             >
             </textarea>
-            <button type='submit'>Quote Request</button>
+            <button className='quoteSubmit__button' type='submit'>Quote Request</button>
 
         </form>
     )
