@@ -36,6 +36,7 @@ export default function HandymanPage(props) {
 
     const renderHandyman = () => {
         const { handyman, user } = context;
+        console.log(handyman)
         const reviews = context.reviews;
         return (
             <>
@@ -50,7 +51,7 @@ export default function HandymanPage(props) {
                 <QuoteRequestForm handyman={handyman} user={user} {...props} />
                 <p className='handyman__introduction'><strong>Introduction: </strong>{handyman.introduction}</p>
                 <HandymanReviews reviews={reviews} />
-                <ReviewForm {...props} />
+                <ReviewForm user={user} {...props} />
             </>
         )
     }

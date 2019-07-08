@@ -7,6 +7,8 @@ import './ReviewForm.css'
 export default function ReviewForm(props) {
     const context = useContext(HandymanContext)
 
+    console.log(context)
+
     const handleSubmit = ev => {
         ev.preventDefault()
         const { handyman } = context
@@ -15,6 +17,7 @@ export default function ReviewForm(props) {
         if (!TokenService.hasAuthToken()) {
             props.history.push('/login')
         }
+
 
         HandymanApiService.postReview(handyman.id, text.value, Number(rating.value))
             .then(context.addReview)
