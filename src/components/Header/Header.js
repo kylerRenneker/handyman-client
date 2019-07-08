@@ -43,10 +43,10 @@ export default function Header() {
         return (
             <div className={'nav__not-loggin-in ' + (active ? 'nav-show' : null)}>
                 <Link onClick={toggleClass} to='/handymanSignup' className='header__links'>
-                    Join as a HandyMan
+                    Join as a handyman
                 </Link>
                 <Link onClick={toggleClass} to='/signup' className='header__links'>
-                    Sign Up
+                    Sign up
                 </Link>
                 <Link onClick={toggleClass} to='/login' className='header__links'>
                     Login

@@ -1,14 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import handymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import './HandymanPage.css'
 import ReviewForm from '../../components/ReviewForm/ReviewForm'
 import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm'
 import TokenService from '../../services/token-service'
+import Modal from '../../components/Modal/Modal'
 import './HandymanPage.css'
 import HandymanImg from './handyman-app-icon.svg'
 
 export default function HandymanPage(props) {
+    const [quoteSent, setQuoteSent] = useState(false)
     const context = useContext(handymanContext)
 
     useEffect(() => {
@@ -34,6 +36,10 @@ export default function HandymanPage(props) {
         }
     }, [])
 
+    const quoteSuccess = () => {
+        setQuoteSent(true)
+    }
+
     const renderHandyman = () => {
         const { handyman, user } = context;
         const reviews = context.reviews;
@@ -45,9 +51,9 @@ export default function HandymanPage(props) {
                         <h2>{handyman.provider_name}</h2>
                         <div>Average rating: {handyman.average_review_rating ? parseInt(handyman.average_review_rating) : 'No current rating'}</div>
                     </div>
-
                 </div>
-                <QuoteRequestForm handyman={handyman} user={user} {...props} />
+                {quoteSent ? <Modal closeModal={setQuoteSent} reason={'Quote request sent!'} /> : null}
+                <QuoteRequestForm onSubmitSuccess={quoteSuccess} {...props} />
                 <p className='handyman__introduction'><strong>Introduction: </strong>{handyman.introduction}</p>
                 <HandymanReviews reviews={reviews} />
                 <ReviewForm {...props} />

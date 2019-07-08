@@ -13,13 +13,13 @@
     display: block
 }
 
-.signup__textInput, .login__inputText, .quote__inputs, .review__testArea {
+.signup__textInput, .login__inputText, .quote__inputs, .review__textArea {
     width: 100%;
-    /* font-size: 1.2em; */
     border-radius: 5px;
     border: 1px solid #ddd;
     margin: 5px 0px;
     padding: 5px;
+    line-height: 1.4em;
 }
 
 .handyman__services label {

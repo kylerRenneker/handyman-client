@@ -1,27 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import HandymanContext from '../../contexts/HandymanContext'
-import HandymanApiService from '../../services/handyman-api-service';
-import TokenService from '../../services/token-service';
+import HandymanApiService from '../../services/handyman-api-service'
+import TokenService from '../../services/token-service'
+import { renderModal } from '../Utils/helpers'
 import './ReviewForm.css'
 
 export default function ReviewForm(props) {
+    const [showModal, setShowModal] = useState(false)
     const context = useContext(HandymanContext)
+    const { handyman, user } = context
 
     const handleSubmit = ev => {
         ev.preventDefault()
-        const { handyman } = context
         const { text, rating } = ev.target
 
         if (!TokenService.hasAuthToken()) {
             props.history.push('/login')
         }
-
-        HandymanApiService.postReview(handyman.id, text.value, Number(rating.value))
-            .then(context.addReview)
-            .then(() => {
-                text.value = ''
-            })
-            .catch(context.setError)
+        else if (handyman.user_id === user.id) {
+            setShowModal(true)
+            text.value = ''
+        }
+        else {
+            HandymanApiService.postReview(handyman.id, text.value, Number(rating.value))
+                .then(context.addReview)
+                .then(() => {
+                    text.value = ''
+                })
+                .catch(context.setError)
+        }
     }
 
     return (
@@ -29,13 +36,13 @@ export default function ReviewForm(props) {
             className='ReviewForm'
             onSubmit={handleSubmit}
         >
+            {showModal ? renderModal(handyman, user, showModal, setShowModal, 'review') : null}
             <textarea
                 className='review__textArea'
                 required
                 aria-label='Type a review...'
                 placeholder='Type a review if this Handyman has completed work for you...'
                 id='text'
-                cols='28'
                 rows='5'
             >
             </textarea>

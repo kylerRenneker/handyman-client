@@ -3,7 +3,6 @@ import AuthApiService from '../../services/auth-api-service'
 import TokenService from '../../services/token-service'
 
 export default function LoginForm(props) {
-    console.log(props)
     const [error, setError] = useState(null)
 
     const handleSubmitJwtAuth = ev => {

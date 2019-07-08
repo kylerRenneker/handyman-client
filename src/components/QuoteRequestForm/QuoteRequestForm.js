@@ -3,11 +3,50 @@ import './QuoteRequestForm.css'
 import ServiceListContext from '../../contexts/ServiceListContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import TokenService from '../../services/token-service'
+import HandymanContext from '../../contexts/HandymanContext'
+import { renderModal } from '../Utils/helpers'
 
 export default function QuoteRequestForm(props) {
+    const [showModal, setShowModal] = useState(false)
     const [error, setError] = useState(null)
     const context = useContext(ServiceListContext)
-    const { handyman, user } = props
+    const handymanContext = useContext(HandymanContext)
+    const { handyman, user } = handymanContext
+
+    useEffect(() => {
+        HandymanApiService.getAllServices()
+            .then(context.setServices)
+            .catch(context.setError)
+    }, [])
+
+    const handleSubmit = (ev) => {
+        ev.preventDefault()
+        setError(null)
+        const { zipcode, services, email, description } = ev.target
+        if (!TokenService.hasAuthToken()) {
+            props.history.push('/login')
+        }
+        else if (handyman.user_id === user.id) {
+            setShowModal(true)
+        }
+        else {
+            HandymanApiService.postQuoteRequest({
+                provider_id: handyman.id,
+                user_id: user.id,
+                location: zipcode.value,
+                email: email.value,
+                description: description.value,
+                services: services.value
+            })
+                .then(quote => {
+                    description.value = ''
+                    props.onSubmitSuccess()
+                })
+                .catch(res => {
+                    setError(res.error)
+                })
+        }
+    }
 
     const renderEmailInput = () => {
         let email
@@ -29,37 +68,6 @@ export default function QuoteRequestForm(props) {
         }
     })
 
-    useEffect(() => {
-        HandymanApiService.getAllServices()
-            .then(context.setServices)
-            .catch(context.setError)
-    }, [])
-
-    const handleSubmit = (ev) => {
-        ev.preventDefault()
-        setError(null)
-        const { zipcode, services, email, description } = ev.target
-        if (!TokenService.hasAuthToken()) {
-            props.history.push('/login')
-        }
-        else {
-            HandymanApiService.postQuoteRequest({
-                provider_id: handyman.id,
-                user_id: user.id,
-                location: zipcode.value,
-                email: email.value,
-                description: description.value,
-                services: services.value
-            })
-                .then(quote => {
-                    description.value = ''
-                })
-                .catch(res => {
-                    setError(res.error)
-                })
-        }
-    }
-
     return (
         <form className='quote__form' onSubmit={handleSubmit}>
             <div role='alert'>
@@ -75,7 +83,7 @@ export default function QuoteRequestForm(props) {
 
             <label htmlFor='quoteRequest__email'>Email</label>
             {renderEmailInput()}
-
+            {showModal ? renderModal(handyman, user, showModal, setShowModal, 'quote request') : null}
             <textarea
                 className='quoteRequest__textArea quote__inputs'
                 name='description'
