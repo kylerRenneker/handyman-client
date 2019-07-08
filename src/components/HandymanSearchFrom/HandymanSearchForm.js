@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import ServiceListContext from '../../contexts/ServiceListContext'

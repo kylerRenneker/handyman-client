@@ -12,14 +12,12 @@ export default function Header() {
     const context = useContext(UserContext)
 
     useEffect(() => {
-        console.log('useEffect ran in header')
         if (TokenService.hasAuthToken()) {
             context.setLoggedIn(true)
         }
     }, [])
 
     const toggleClass = () => {
-        console.log('toggle class ran')
         setActive(!active)
     }
 
@@ -64,7 +62,7 @@ export default function Header() {
                     <Link to='/'>
                         <img onClick={closeMenu} className='header__icon' src={headerIcon} alt={'Handyman Icon'} />
                     </Link>
-                    <img onClick={toggleClass} className={'menu__toggle ' + (TokenService.hasAuthToken() ? 'arrow-hide' : null)} src={downArrow} />
+                    <img onClick={toggleClass} alt='menu dropdown arrow' className={'menu__toggle ' + (TokenService.hasAuthToken() ? 'arrow-hide' : null)} src={downArrow} />
                 </div>
                 {TokenService.hasAuthToken()
                     ? renderLogoutLink()

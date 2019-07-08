@@ -6,7 +6,7 @@ import ReviewForm from '../../components/ReviewForm/ReviewForm'
 import QuoteRequestForm from '../../components/QuoteRequestForm/QuoteRequestForm'
 import TokenService from '../../services/token-service'
 import './HandymanPage.css'
-import HandymanImg from './312334.svg'
+import HandymanImg from './handyman-app-icon.svg'
 
 export default function HandymanPage(props) {
     const context = useContext(handymanContext)
@@ -40,8 +40,8 @@ export default function HandymanPage(props) {
         return (
             <>
                 <div className='handymanPage__header'>
-                    <img className='handyman__image' src={HandymanImg} />
-                    <div>
+                    <img className='handyman__image' alt='handyman' src={HandymanImg} />
+                    <div className='name__rating'>
                         <h2>{handyman.provider_name}</h2>
                         <div>Average rating: {handyman.average_review_rating ? parseInt(handyman.average_review_rating) : 'No current rating'}</div>
                     </div>
@@ -74,7 +74,7 @@ export default function HandymanPage(props) {
 
     function HandymanReviews({ reviews = [] }) {
         return (
-            <ul className='.handyman__review__list'><strong>Reviews</strong>
+            <ul className='handyman__review__list'><strong>Reviews</strong>
                 {
                     reviews.map(review =>
                         < li key={review.id} className='handyman__review' >

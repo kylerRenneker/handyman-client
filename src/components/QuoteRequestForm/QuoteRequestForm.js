@@ -24,6 +24,8 @@ export default function QuoteRequestForm(props) {
     const options = context.services.map((service) => {
         if (handyman.services.includes(service.id)) {
             return <option key={service.id} value={service.id} name='services'>{service.name}</option>
+        } else {
+            return null
         }
     })
 

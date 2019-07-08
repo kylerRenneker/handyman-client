@@ -9,7 +9,7 @@ export default function LoginPage(props) {
         const { location = {}, history = { push: () => { } } } = props
         //const destination = (location.state || {}).from || '/'
         context.setLoggedIn(true)
-        if (history.location.state) {
+        if (history.location.state) { //checkeing to see if the location state has been set 
             history.push('/')
         }
         else {

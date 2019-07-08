@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import HandymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service';
 import TokenService from '../../services/token-service';
+import './ReviewForm.css'
 
 export default function ReviewForm(props) {
     const context = useContext(HandymanContext)
@@ -34,7 +35,7 @@ export default function ReviewForm(props) {
                 aria-label='Type a review...'
                 placeholder='Type a review if this Handyman has completed work for you...'
                 id='text'
-                cols='30'
+                cols='28'
                 rows='5'
             >
             </textarea>
@@ -53,7 +54,7 @@ export default function ReviewForm(props) {
                     <option value='5'>5 Stars</option>
                 </select>
             </div>
-            <button type='submit'>
+            <button className='review__button' type='submit'>
                 Post review
             </button>
         </form>

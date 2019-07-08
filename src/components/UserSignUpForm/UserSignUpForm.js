@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, Fragment } from 'react'
 import AuthApiService from '../../services/auth-api-service'
 import ServiceListContext from '../../contexts/ServiceListContext'
 import HandymanApiService from '../../services/handyman-api-service'
@@ -27,11 +27,10 @@ export default function UserSignUpForm(props) {
     }
 
     const servicesOptions = context.services.map(service => {
-        return <>
-            <label key={service.id} key={service.id} htmlFor={service.id}>
+        return <Fragment key={service.id}>
+            <label htmlFor={service.id}>
                 <input onChange={onServiceChange} id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
-
-        </>
+        </Fragment>
     })
 
     const handleSubmit = ev => {
@@ -76,7 +75,7 @@ export default function UserSignUpForm(props) {
                 </div>
                 <div className='location'>
                     <label htmlFor='signup-zipcode'>Your location</label>
-                    <input className='signup__textInput' required inputMode='numeric' maxLength='5' autoComplete='postal-code' id='signup__zipcode' name='zipcode' placeholder='Zip code' name='location'></input>
+                    <input className='signup__textInput' required type='text' pattern='\d*' inputMode='numeric' maxLength='5' autoComplete='postal-code' id='signup__zipcode' placeholder='Zip code' name='location'></input>
                 </div>
                 <div className='handyman__introduction'>
                     <label htmlFor='introduction'>Introduce your business</label>

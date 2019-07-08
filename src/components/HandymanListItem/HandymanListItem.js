@@ -7,7 +7,7 @@ export default function ProviderListItem(props) {
     const { provider } = props
     return (
         <Link to={`/handymen/${provider.id}`} className='link__handyman'>
-            <img className='handyman__icon' src={HMListImg} />
+            <img className='handyman__icon' src={HMListImg} alt='icon for handyman list item' />
             <div className='handymanLink__info'>
                 <header className='list__item__header'>
                     <h2>{provider.provider_name}</h2>
