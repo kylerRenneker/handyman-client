@@ -10,6 +10,8 @@ export default function ReviewForm(props) {
     const context = useContext(HandymanContext)
     const { handyman, user } = context
 
+    console.log(context)
+
     const handleSubmit = ev => {
         ev.preventDefault()
         const { text, rating } = ev.target

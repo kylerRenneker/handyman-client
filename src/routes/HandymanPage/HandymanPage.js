@@ -42,6 +42,7 @@ export default function HandymanPage(props) {
 
     const renderHandyman = () => {
         const { handyman, user } = context;
+        console.log(handyman)
         const reviews = context.reviews;
         return (
             <>
