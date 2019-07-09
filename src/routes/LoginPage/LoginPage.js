@@ -9,8 +9,9 @@ export default function LoginPage(props) {
 
 
     const handleLoginSuccess = () => {
-        const { location = {}, history = { push: () => { } } } = props
+        const { location, history } = props
         context.setLoggedIn(true)
+        console.log(history)
         if (history.location.state) { //checkeing to see if the location state has been set on signup
             history.push('/')
         }

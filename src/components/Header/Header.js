@@ -7,9 +7,11 @@ import TokenService from '../../services/token-service'
 import UserContext from '../../contexts/UserContext'
 
 
-export default function Header() {
+export default function Header(props) {
     const [active, setActive] = useState(false)
     const context = useContext(UserContext)
+
+    console.log('header props: ', props)
 
     useEffect(() => {
         if (TokenService.hasAuthToken()) {
@@ -40,9 +42,11 @@ export default function Header() {
 
     const renderLoginLink = () => {
 
+        const { location } = props
+
         return (
             <div className={'nav__not-loggin-in ' + (active ? 'nav-show' : null)}>
-                <Link onClick={toggleClass} to='/handymanSignup' className='header__links'>
+                <Link onClick={toggleClass} to={{ pathname: '/handymanSignup', state: { from: location.pathname } }} className='header__links'>
                     Join as a handyman
                 </Link>
                 <Link onClick={toggleClass} to='/signup' className='header__links'>
@@ -51,7 +55,7 @@ export default function Header() {
                 <Link onClick={toggleClass} to='/login' className='header__links'>
                     Login
                 </Link>
-            </div>
+            </div >
         )
     }
 
