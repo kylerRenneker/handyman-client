@@ -12,6 +12,7 @@ export default function HandymanListPage(props) {
     }
 
     useEffect(() => {
+        console.log(props)
         context.clearError()
         if (context.currentZipCode && context.service) {
             localStorage.setItem('service', context.service)
