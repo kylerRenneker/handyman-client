@@ -11,9 +11,6 @@ export default function UserSignUpForm(props) {
     const servicesSelected = []
 
     useEffect(() => {
-        // props.history.pushState({
-        //     from: 'signup'
-        // })
         HandymanApiService.getAllServices()
             .then(context.setServices)
             .catch(context.setError)

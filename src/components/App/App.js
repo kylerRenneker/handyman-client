@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
 import Header from '../Header/Header'
 import SearchLandingPage from '../../routes/SearchLandingPage/SearchLandingPage'
 import HandymanListPage from '../../routes/HandymanListPage/HandymanListPage'
@@ -10,11 +9,10 @@ import LoginPage from '../../routes/LoginPage/LoginPage'
 import './App.css'
 
 function App() {
-  const history = createBrowserHistory()
   return (
     <div className='App'>
       <header className='app__header'>
-        <Header {...history} />
+        <Header />
       </header>
       <main className='app__main'>
         <Route

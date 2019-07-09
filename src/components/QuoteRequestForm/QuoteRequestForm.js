@@ -12,6 +12,7 @@ export default function QuoteRequestForm(props) {
     const context = useContext(ServiceListContext)
     const handymanContext = useContext(HandymanContext)
     const { handyman, user } = handymanContext
+    const { history = { push: () => { } } } = props
 
     useEffect(() => {
         HandymanApiService.getAllServices()
@@ -24,7 +25,12 @@ export default function QuoteRequestForm(props) {
         setError(null)
         const { zipcode, services, email, description } = ev.target
         if (!TokenService.hasAuthToken()) {
-            props.history.push('/login')
+            history.push({
+                pathname: '/login',
+                state: {
+                    prevPath: `${props.location.pathname}`
+                }
+            })
         }
         else if (handyman.user_id === user.id) {
             setShowModal(true)

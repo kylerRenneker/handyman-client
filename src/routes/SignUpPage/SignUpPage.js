@@ -3,14 +3,13 @@ import UserSignUpForm from '../../components/UserSignUpForm/UserSignUpForm'
 import './SignUpPage.css'
 
 export default function SignUpPage(props) {
-    console.log(props)
 
     const handleSignUpSuccess = () => {
         const { history = { push: () => { } } } = props
         history.push({
             pathname: 'login',
             state: {
-                from: '/signup'
+                prevPath: '/signup'
             }
         })
     }

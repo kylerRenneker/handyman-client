@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { createBrowserHistory } from 'history'
 import { Link } from 'react-router-dom'
 import headerIcon from './104106.jpg'
 import downArrow from './down-arrow.svg'
@@ -10,8 +11,7 @@ import UserContext from '../../contexts/UserContext'
 export default function Header(props) {
     const [active, setActive] = useState(false)
     const context = useContext(UserContext)
-
-    console.log('header props: ', props)
+    const history = createBrowserHistory()
 
     useEffect(() => {
         if (TokenService.hasAuthToken()) {
@@ -42,17 +42,17 @@ export default function Header(props) {
 
     const renderLoginLink = () => {
 
-        const { location } = props
+        const { location } = history
 
         return (
             <div className={'nav__not-loggin-in ' + (active ? 'nav-show' : null)}>
-                <Link onClick={toggleClass} to={{ pathname: '/handymanSignup', state: { from: location.pathname } }} className='header__links'>
+                <Link onClick={toggleClass} to={{ pathname: '/handymanSignup', state: { prevPath: location.pathname } }} className='header__links'>
                     Join as a handyman
                 </Link>
-                <Link onClick={toggleClass} to='/signup' className='header__links'>
+                <Link onClick={toggleClass} to={{ pathname: '/signup', state: { prevPath: location.pathname } }} className='header__links'>
                     Sign up
                 </Link>
-                <Link onClick={toggleClass} to='/login' className='header__links'>
+                <Link onClick={toggleClass} to={{ pathname: '/login', state: { prevPath: location.pathname } }} className='header__links'>
                     Login
                 </Link>
             </div >

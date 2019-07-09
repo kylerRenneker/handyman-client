@@ -13,8 +13,6 @@ export default function HandymanPage(props) {
     const [quoteSent, setQuoteSent] = useState(false)
     const context = useContext(handymanContext)
 
-    console.log('handyman page props: ', props)
-
     useEffect(() => {
         const currentZipCode = localStorage.getItem('zipcode')
         const handymanId = Number(props.match.params.handyman_id)
@@ -43,8 +41,7 @@ export default function HandymanPage(props) {
     }
 
     const renderHandyman = () => {
-        const { handyman, user } = context;
-        console.log(handyman)
+        const { handyman } = context;
         const reviews = context.reviews;
         return (
             <>

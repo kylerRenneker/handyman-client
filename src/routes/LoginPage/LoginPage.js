@@ -1,22 +1,36 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import LoginForm from '../../components/LoginForm/LoginForm'
 import UserContext from '../../contexts/UserContext'
 
 export default function LoginPage(props) {
+    const [fromSignup, setFromSignup] = useState(false)
     const context = useContext(UserContext)
+    const { history = {} } = props
+    let previousLocation = ''
 
-    console.log(props)
+    if (history.location.state) {
+        previousLocation = history.location.state.prevPath
+    }
+
+    useEffect(() => {
+        setFromSignup(false)
+        if (previousLocation === '/handymanSignup') {
+            setFromSignup(true)
+        }
+        else if (previousLocation === '/signup') {
+            setFromSignup(true)
+        }
+    }, [])
 
 
     const handleLoginSuccess = () => {
-        const { location, history } = props
         context.setLoggedIn(true)
-        console.log(history)
-        if (history.location.state) { //checkeing to see if the location state has been set on signup
+        if (fromSignup) { //checkeing to see if the location state has been set on signup
             history.push('/')
+            setFromSignup(false)
         }
         else {
-            history.goBack()
+            history.push(history.location.state.prevPath)
         }
     }
 
