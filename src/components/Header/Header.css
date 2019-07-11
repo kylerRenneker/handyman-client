@@ -52,3 +52,7 @@
 .arrow-hide {
     display: none;
 }
+
+.links__loggedIn {
+    align-self: center;
+}

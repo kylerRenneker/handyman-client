@@ -1,4 +1,4 @@
-.signup, .login__form, .handyman__page {
+.signup__form, .login__form, .handyman__page {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #e9eced;
@@ -13,7 +13,7 @@
     display: block
 }
 
-.signup__textInput, .login__inputText, .quote__inputs, .review__textArea {
+.form__textInput, .login__inputText, .quote__inputs, .review__textArea {
     width: 100%;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -24,6 +24,7 @@
 
 .handyman__services label {
     margin: 10px 0px;
+    display: block
 }
 
 .signup__button, .login__button, .review__button {

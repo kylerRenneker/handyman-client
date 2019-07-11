@@ -8,6 +8,8 @@ export default function LoginPage(props) {
     const { history = {} } = props
     let previousLocation = ''
 
+    console.log(history)
+
     if (history.location.state) {
         previousLocation = history.location.state.prevPath
     }

@@ -5,12 +5,13 @@ import HandymanApiService from '../../services/handyman-api-service'
 import './UserSignUpForm.css'
 
 export default function UserSignUpForm(props) {
-    const [error, setError] = useState(null)
     const context = useContext(ServiceListContext)
+    const { error } = context
 
     const servicesSelected = []
 
     useEffect(() => {
+        console.log(error)
         HandymanApiService.getAllServices()
             .then(context.setServices)
             .catch(context.setError)
@@ -38,7 +39,7 @@ export default function UserSignUpForm(props) {
         const { full_name, email, user_name, password } = ev.target
         const { display_name, location, introduction } = ev.target
 
-        setError(null)
+        context.clearError()
         AuthApiService.postUser({
             user_name: user_name.value,
             password: password.value,
@@ -61,9 +62,7 @@ export default function UserSignUpForm(props) {
                 password.value = ''
                 props.onSignUpSuccess()
             })
-            .catch(res => {
-                setError(res.error)
-            })
+            .catch(context.setError)
     }
 
     const renderHandymanSignUp = () => {
@@ -71,15 +70,15 @@ export default function UserSignUpForm(props) {
             <>
                 <div className='display_name'>
                     <label htmlFor='HandymanSignUpForm__display_name'>Display name</label>
-                    <input className='signup__textInput' required id='HandymanSignUpForm__display_name' type='text' name='display_name'></input>
+                    <input className='form__textInput' required id='HandymanSignUpForm__display_name' type='text' name='display_name'></input>
                 </div>
                 <div className='location'>
                     <label htmlFor='signup-zipcode'>Your location</label>
-                    <input className='signup__textInput' required type='text' pattern='\d*' inputMode='numeric' maxLength='5' autoComplete='postal-code' id='signup__zipcode' placeholder='Zip code' name='location'></input>
+                    <input className='form__textInput' required type='text' pattern='\d*' inputMode='numeric' maxLength='5' autoComplete='postal-code' id='signup__zipcode' placeholder='Zip code' name='location'></input>
                 </div>
                 <div className='handyman__introduction'>
                     <label htmlFor='introduction'>Introduce your business</label>
-                    <textarea className='signup__textInput' id='introduction' name='introduction' rows='5' cols='33'></textarea>
+                    <textarea className='form__textInput' id='introduction' name='introduction' rows='5' cols='33'></textarea>
                 </div>
                 <div className='handyman__services'>
                     <p>Choose the services you can provide:</p>
@@ -91,58 +90,58 @@ export default function UserSignUpForm(props) {
 
     return (
         <form
-            className='signup'
+            className='signup__form'
             onSubmit={handleSubmit}
         >
             <div role='alert'>
-                {error && <p className='red'>{error}</p>}
+                {error && <p className='red'>{error.error}</p>}
             </div>
             <div className='full_name'>
-                <label htmlFor='signup__full_name'>
+                <label htmlFor='form__full_name'>
                     Full name
                 </label>
                 <input
-                    className='signup__textInput'
+                    className='form__textInput'
                     name='full_name'
                     type='text'
                     required
-                    id='signup__full_name'>
+                    id='form__full_name'>
                 </input>
             </div>
             <div className='user_name'>
-                <label htmlFor='signup__user_name'>
+                <label htmlFor='form__user_name'>
                     User name
                 </label>
                 <input
-                    className='signup__textInput'
+                    className='form__textInput'
                     name='user_name'
                     type='text'
                     required
-                    id='signup__user_name'>
+                    id='form__user_name'>
                 </input>
             </div>
             <div className='password'>
-                <label htmlFor='signup__password'>
+                <label htmlFor='form__password'>
                     Password
                 </label>
                 <input
-                    className='signup__textInput'
+                    className='form__textInput'
                     name='password'
                     type='password'
                     required
-                    id='signup__password'>
+                    id='form__password'>
                 </input>
             </div>
-            <div className='nick_name'>
-                <label htmlFor='signup__nick_name'>
+            <div className='email'>
+                <label htmlFor='form__email'>
                     Email
           </label>
                 <input
-                    className='signup__textInput'
+                    className='form__textInput'
                     name='email'
                     type='email'
                     required
-                    id='signup__email'>
+                    id='form__email'>
                 </input>
             </div>
             {

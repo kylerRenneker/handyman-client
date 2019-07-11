@@ -12,12 +12,10 @@ export default ServiceListContext
 
 export function ServiceListProvider(props) {
     const [services, setServices] = useState([])
-    const [error, setError] = useState({
-        error: null
-    })
+    const [error, setError] = useState(null)
 
     const setErrorFn = error => {
-        setError({ error })
+        setError(error)
     }
 
     const clearError = () => {

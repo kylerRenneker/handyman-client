@@ -16,6 +16,13 @@ const HandymanApiService = {
             !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
         );
     },
+    getHandymanByUserId(userId) {
+        return fetch(`${config.API_ENDPOINT}/providers/user/${userId}`, {
+            headers: {}
+        }).then(res =>
+            !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+        );
+    },
     getAllServices() {
         return fetch(`${config.API_ENDPOINT}/`, {
             headers: {}

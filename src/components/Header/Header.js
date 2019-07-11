@@ -36,7 +36,10 @@ export default function Header(props) {
 
     const renderLogoutLink = () => {
         return (
-            <Link className='header__links signout' onClick={handleLogoutClick} to='/'>Logout</Link>
+            <div className='links__loggedIn'>
+                <Link className='header__links' to='/profile'>Profile</Link>
+                <Link className='header__links signout' onClick={handleLogoutClick} to='/'>Logout</Link>
+            </div>
         )
     }
 
@@ -46,10 +49,10 @@ export default function Header(props) {
 
         return (
             <div className={'nav__not-loggin-in ' + (active ? 'nav-show' : null)}>
-                <Link onClick={toggleClass} to={{ pathname: '/handymanSignup', state: { prevPath: location.pathname } }} className='header__links'>
+                <Link onClick={toggleClass} to='/handymanSignup' className='header__links'>
                     Join as a handyman
                 </Link>
-                <Link onClick={toggleClass} to={{ pathname: '/signup', state: { prevPath: location.pathname } }} className='header__links'>
+                <Link onClick={toggleClass} to='/signup' className='header__links'>
                     Sign up
                 </Link>
                 <Link onClick={toggleClass} to={{ pathname: '/login', state: { prevPath: location.pathname } }} className='header__links'>

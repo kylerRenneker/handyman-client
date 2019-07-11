@@ -18,7 +18,11 @@ export default HandymanContext
 export function HandymanProvider(props) {
     const [handyman, setHandyman] = useState({})
     const [reviews, setReviews] = useState([])
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({
+        full_name: '',
+        user_name: '',
+        email: ''
+    })
     const [error, setError] = useState({ error: null })
 
     const setErrorFn = error => {
