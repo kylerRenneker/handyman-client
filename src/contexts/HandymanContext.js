@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 const HandymanContext = React.createContext({
     handyman: {},
     reviews: [],
+    quotes: [],
     user: {},
     error: null,
     setError: () => { },
@@ -10,7 +11,8 @@ const HandymanContext = React.createContext({
     setHandyman: () => { },
     clearHandyman: () => { },
     setReviews: () => { },
-    addReview: () => { }
+    addReview: () => { },
+    setQuotes: () => { }
 })
 
 export default HandymanContext
@@ -18,11 +20,8 @@ export default HandymanContext
 export function HandymanProvider(props) {
     const [handyman, setHandyman] = useState({})
     const [reviews, setReviews] = useState([])
-    const [user, setUser] = useState({
-        full_name: '',
-        user_name: '',
-        email: ''
-    })
+    const [quotes, setQuotes] = useState([])
+    const [user, setUser] = useState({})
     const [error, setError] = useState({ error: null })
 
     const setErrorFn = error => {
@@ -41,9 +40,14 @@ export function HandymanProvider(props) {
         setReviews(reviews)
     }
 
+    const setQuotesFn = quotes => {
+        setQuotes(quotes)
+    }
+
     const clearHandyman = () => {
         setHandyman({})
         setReviews([])
+        setQuotes([])
     }
 
     const addReview = review => {
@@ -65,6 +69,7 @@ export function HandymanProvider(props) {
         handyman: handyman,
         user: user,
         reviews: reviews,
+        quotes: quotes,
         error: error,
         setError: setErrorFn,
         clearError: clearError,
@@ -72,6 +77,7 @@ export function HandymanProvider(props) {
         setUser: setUserFn,
         clearUser: clearUser,
         setReviews: setReviewsFn,
+        setQuotes: setQuotesFn,
         clearHandyman: clearHandyman,
         addReview: addReview
     }

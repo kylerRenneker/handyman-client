@@ -16,6 +16,7 @@ export default function HandymanPage(props) {
     useEffect(() => {
         const currentZipCode = localStorage.getItem('zipcode')
         const handymanId = Number(props.match.params.handyman_id)
+        console.log(handymanId, currentZipCode)
         HandymanApiService.getHandymanById(handymanId, currentZipCode)
             .then(context.setHandyman)
             .catch(context.setError)
@@ -65,6 +66,7 @@ export default function HandymanPage(props) {
         const { error, handyman } = context
         let content
         if (error.error) {
+            console.log(error)
             content = <h2 className='red'>{error.error}</h2>
         } else if (!handyman.id) {
             content = <div className='loading' />

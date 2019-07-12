@@ -17,6 +17,7 @@ const HandymanApiService = {
         );
     },
     getHandymanByUserId(userId) {
+        console.log(userId)
         return fetch(`${config.API_ENDPOINT}/providers/user/${userId}`, {
             headers: {}
         }).then(res =>
@@ -31,6 +32,7 @@ const HandymanApiService = {
         );
     },
     getHandymanReviews(handymanId, zipcode) {
+        console.log(handymanId, zipcode)
         return fetch(`${config.API_ENDPOINT}/providers/${handymanId}/reviews/?zipcode=${zipcode}`, {
             headers: {}
         }).then(res =>
@@ -56,7 +58,6 @@ const HandymanApiService = {
     getUser() {
         return fetch(`${config.API_ENDPOINT}/users/loggedIn`, {
             headers: {
-                'content-type': 'application/json',
                 authorization: `bearer ${TokenService.getAuthToken()}`
             },
         })
@@ -72,6 +73,17 @@ const HandymanApiService = {
                 authorization: `bearer ${TokenService.getAuthToken()}`
             },
             body: JSON.stringify(quoteRequest)
+        })
+            .then(res =>
+                !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+            );
+    },
+    getQuoteRequests(handymanId) {
+        return fetch(`${config.API_ENDPOINT}/quote/myQuotes/${handymanId}`, {
+            headers: {
+                authorization: `bearer ${TokenService.getAuthToken()}`
+            },
+
         })
             .then(res =>
                 !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
