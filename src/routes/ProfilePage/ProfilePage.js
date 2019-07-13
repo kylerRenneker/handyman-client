@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import HandymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import TokenService from '../../services/token-service'
 import './ProfilePage.css'
 
 export default function ProfilePage(props) {
-    const [error, setError] = useState(null)
-    const [hasUser, setHasUser] = useState(false)
     const context = useContext(HandymanContext)
     const { handyman, user, quotes } = context
     console.log(user)
@@ -16,8 +14,9 @@ export default function ProfilePage(props) {
 
 
     useEffect(() => {
+        context.clearError()
         if (!TokenService.hasAuthToken()) {
-            setError('You must be logged in to view profile info')
+            context.setError({ error: 'You must be logged in to view profile info' })
         }
         else {
             HandymanApiService.getUser()
@@ -53,10 +52,12 @@ export default function ProfilePage(props) {
             </li>
         })
         return (
-            <ul className='quote__list'>
+            <section>
                 <h3 className='requests__title'>Quote Requests</h3>
-                {content}
-            </ul>
+                <ul className='quote__list'>
+                    {content}
+                </ul>
+            </section>
         )
     }
 
@@ -68,17 +69,29 @@ export default function ProfilePage(props) {
         ev.preventDefault()
 
         const { full_name, user_name, password, email } = ev.target
-
+        const updatedUser = {
+            full_name: full_name.value,
+            user_name: user_name.value,
+            password: password.value,
+            email: email.value
+        }
+        console.log(updatedUser)
+        HandymanApiService.updateUser(user.id, updatedUser)
+            .then(res => {
+                console.log(res)
+            })
+            .catch(context.setError)
     }
 
     const renderProfileForm = () => {
+        const { error } = context
         return (
             <>
                 <form
                     onSubmit={updateUserInfo}
                     className='profile__form'>
                     <div role='alert'>
-                        {error && <p className='red'>{error}</p>}
+                        {error && <p className='red'>{error.error}</p>}
                     </div>
                     <h3>Your Info</h3>
                     <div className='full_name'>
@@ -134,7 +147,7 @@ export default function ProfilePage(props) {
                         </input>
                     </div>
                     {/* {handyman ? renderHandymanInfo() : null} */}
-                    <button type='submit'>Update Info</button>
+                    <button className='profile__button' type='submit'>Update Info</button>
                 </form>
             </>
         )

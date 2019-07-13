@@ -1,4 +1,4 @@
-.review__button {
+.review__button, .profile__button {
     display: block;
     margin: 20px auto!important;
     background-color: #20BF55!important;

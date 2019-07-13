@@ -88,11 +88,20 @@ const HandymanApiService = {
             .then(res =>
                 !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
             );
-    }
-
-
-
-
+    },
+    updateUser(userId, updatedUser) {
+        return fetch(`${config.API_ENDPOINT}/users/${userId}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify(updatedUser)
+        })
+            .then(res =>
+                !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+            );
+    },
 }
 
 export default HandymanApiService;

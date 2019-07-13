@@ -1,6 +1,6 @@
 .app__main {
     border-radius: 10px;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: auto;
     padding: 0px 20px;
 }
@@ -28,6 +28,10 @@
     display: flex;
 }
 
+@media only screen and (min-width: 600px) {
+
+}
+
 /*styles that need to be simplified to one shared classname*/
 
 .signup__form, .login__form, .handyman__page, .profile__form, .quote__item {
@@ -50,8 +54,8 @@
     line-height: 1.4em;
 }
 
-.signup__button, .login__button, .review__button {
-    width: 160px;
+.signup__button, .login__button, .review__button, .profile__button {
+    width: 200px;
     padding: 10px;
     border-radius: 30px;
     border: none;

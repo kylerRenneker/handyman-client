@@ -1,7 +1,14 @@
-li.quote__item {
-    margin: auto;
+.quote__list {
+    display: flex;
+    flex-direction: column;
 }
 
 .requests__title {
     text-align: center
+}
+
+@media only screen and (min-width: 600px) {
+    .quote__list {
+        flex-direction: row;
+    }
 }
