@@ -1,3 +1,22 @@
+.App {
+    padding-top: 100px;
+    background-color: #ffffff;
+    min-height: 100vh;
+    background-image: url(/static/media/2549.e5459a94.jpg);
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+/* .App::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.2);
+} */
+
 .app__main {
     border-radius: 10px;
     max-width: 1200px;
@@ -11,6 +30,12 @@
 
 .app__header {
     border-bottom: 1px solid #e9e9e9;
+    background-color: #fffffe;
+    box-shadow: 0 2px 5px #cecece;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .btn__close {
@@ -29,14 +54,17 @@
 }
 
 @media only screen and (min-width: 600px) {
-
+    .App {
+        background-size: cover;
+    }
 }
 
 /*styles that need to be simplified to one shared classname*/
 
-.signup__form, .login__form, .handyman__page, .profile__form, .quote__item {
+.signup__form, .login__form, .handyman__page, .profile__form, .quote__item, .handyman__list {
     padding: 10px;
     border-radius: 10px;
+    background-color: #ffff;
     border: 1px solid #e9eced;
     box-shadow: 0 5px 10px #e9eced;
     margin: 10px 10px 40px 10px;
@@ -48,7 +76,7 @@
 .form__textInput, .login__inputText, .quote__inputs, .review__textArea {
     width: 100%;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1.5px solid #ddd;
     margin: 5px 0px;
     padding: 5px;
     line-height: 1.4em;

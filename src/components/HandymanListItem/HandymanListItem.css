@@ -18,3 +18,9 @@
 .handyman__linkInfo {
     grid-area: linkInfo;
 }
+
+@media only screen and (min-width: 600px) {
+    .handyman__icon {
+        width: 100px
+    }
+}
