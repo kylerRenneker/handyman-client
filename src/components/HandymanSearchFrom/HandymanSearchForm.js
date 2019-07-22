@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import HandymanListContext from '../../contexts/HandymanListContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import ServiceListContext from '../../contexts/ServiceListContext'
 import './HandymanSearchForm.css'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 export default function HandymanSearchForm(props) {
+    const [loading, setLoading] = useState(true)
     const context = useContext(HandymanListContext)
     const servicesContext = useContext(ServiceListContext)
     const services = servicesContext.services
@@ -14,9 +16,12 @@ export default function HandymanSearchForm(props) {
     })
 
     useEffect(() => {
-        HandymanApiService.getAllServices()
-            .then(servicesContext.setServices)
-            .catch(context.setError)
+        if (loading) {
+            HandymanApiService.getAllServices()
+                .then(servicesContext.setServices)
+                .then(setLoading(false))
+                .catch(context.setError)
+        }
     }, [])
 
     const submitSearch = (ev) => {
@@ -34,8 +39,9 @@ export default function HandymanSearchForm(props) {
 
     return (
         <form onSubmit={submitSearch} className='form__handyman'>
+            {loading ? <LoadingSpinner /> : null}
             <select name='options' className='landingForm__item landing__select'>
-                {options}
+                {!loading ? options : null}
             </select>
             <label className='landing__zip'>
                 <input className='landingForm__item input__zipcode' required inputMode='numeric' maxLength='5' autoComplete='postal-code' id='search__zipcode' name='zipcode' placeholder='Zip code'></input></label>
