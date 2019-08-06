@@ -17,7 +17,6 @@ const HandymanApiService = {
         );
     },
     getHandymanByUserId(userId) {
-        console.log(userId)
         return fetch(`${config.API_ENDPOINT}/providers/user/${userId}`, {
             headers: {}
         }).then(res =>

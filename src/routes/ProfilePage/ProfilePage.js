@@ -1,20 +1,27 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState, Fragment } from 'react'
 import HandymanContext from '../../contexts/HandymanContext'
 import HandymanApiService from '../../services/handyman-api-service'
 import TokenService from '../../services/token-service'
+import Modal from '../../components/Modal/Modal'
 import './ProfilePage.css'
+import ServiceListContext from '../../contexts/ServiceListContext';
 
 export default function ProfilePage(props) {
+    const [updateSuccess, setUpdateSuccess] = useState(false)
+    const [introduction, setIntroduction] = useState(null)
     const context = useContext(HandymanContext)
+    const servicesContext = useContext(ServiceListContext)
     const { handyman, user, quotes } = context
-    console.log(user)
+    // console.log(user)
     console.log(handyman)
-    console.log(quotes)
-    console.log(context.error)
+    // console.log(quotes)
+    // console.log(context.error)
+    console.log(updateSuccess)
 
 
     useEffect(() => {
         context.clearError()
+        setUpdateSuccess(false)
         if (!TokenService.hasAuthToken()) {
             context.setError({ error: 'You must be logged in to view profile info' })
         }
@@ -27,10 +34,13 @@ export default function ProfilePage(props) {
                 .then(user => HandymanApiService.getHandymanByUserId(user.id))
                 .then(handyman => {
                     context.setHandyman(handyman)
+                    setIntroduction(handyman.introduction)
                     return handyman
                 })
                 .then(handyman => HandymanApiService.getQuoteRequests(handyman.id))
                 .then(context.setQuotes)
+                .then(res => HandymanApiService.getAllServices())
+                .then(res => servicesContext.setServices(res))
                 .catch(context.setError)
         }
 
@@ -60,10 +70,55 @@ export default function ProfilePage(props) {
             </section>
         )
     }
+    const servicesSelected = []
+    const onServiceChange = (ev) => {
+        if (ev.target.checked) {
+            servicesSelected.push(Number(ev.target.value))
+        }
+        else {
+            let index = servicesSelected.indexOf(ev.target.value)
+            servicesSelected.splice(index, 1)
+        }
+    }
 
-    // const renderHandymanInfo = () => {
+    const servicesOptions = servicesContext.services.map(service => {
+        return <Fragment key={service.id}>
+            <label htmlFor={service.id}>
+                <input onChange={onServiceChange} id={service.id} type='checkbox' name='services[]' value={service.id} />{service.name}</label>
+        </Fragment>
+    })
 
-    // }
+    const renderHandymanInfo = () => {
+        const updateTextArea = (event) => {
+            setIntroduction(event.target.value)
+        }
+        return (
+            <>
+                <div className='display_name'>
+                    <label htmlFor='HandymanSignUpForm__display_name'>Display name</label>
+                    <input defaultValue={handyman.provider_name} className='form__textInput' required id='HandymanSignUpForm__display_name' type='text' name='display_name'></input>
+                </div>
+                <div className='location'>
+                    <label htmlFor='signup-zipcode'>Your location</label>
+                    <input defaultValue={handyman.location} className='form__textInput' required type='text' pattern='\d*' inputMode='numeric' maxLength='5' autoComplete='postal-code' id='signup__zipcode' placeholder='Zip code' name='location'></input>
+                </div>
+                <div className='handyman__introduction'>
+                    <label htmlFor='introduction'>Introduce your business</label>
+                    <textarea value={introduction} onChange={updateTextArea} className='form__textInput' id='introduction' name='introduction' rows='5' cols='33'></textarea>
+                </div>
+                <div className='handyman__services'>
+                    <h3>Please re-select the services you can provide</h3>
+                    {servicesOptions}
+                </div>
+            </>
+        )
+    }
+
+    const successfulUpdate = () => {
+        return (
+            <Modal reason="Your profile has been updated." closeModal={setUpdateSuccess} />
+        )
+    }
 
     const updateUserInfo = ev => {
         ev.preventDefault()
@@ -75,10 +130,10 @@ export default function ProfilePage(props) {
             password: password.value,
             email: email.value
         }
-        console.log(updatedUser)
         HandymanApiService.updateUser(user.id, updatedUser)
             .then(res => {
                 console.log(res)
+                setUpdateSuccess(true)
             })
             .catch(context.setError)
     }
@@ -146,7 +201,7 @@ export default function ProfilePage(props) {
                             id='form__email'>
                         </input>
                     </div>
-                    {/* {handyman ? renderHandymanInfo() : null} */}
+                    {handyman ? renderHandymanInfo() : null}
                     <button className='profile__button' type='submit'>Update Info</button>
                 </form>
             </>
@@ -157,6 +212,7 @@ export default function ProfilePage(props) {
         <section className='profile__page'>
             <h2>My Profile</h2>
             {quotes ? renderQuoteRequests(quotes) : null}
+            {updateSuccess ? successfulUpdate() : null}
             {user ? renderProfileForm() : null}
         </section>
     )
